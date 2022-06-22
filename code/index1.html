@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Eval Sonification</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+    window.onerror = function(message, url, linenumber) {
+	     alert('JavaScript error: ' + message + ' on line ' + linenumber + ' for ' + url);
+     }
+   </script>
+</head>
+<body>
+   <div class="mainbox">
+      <table>
+      <tr>
+         <th>
+            <div class="box1">
+               <h1 id="pagetitle">Chargement en cours...<br/></h1>
+               <p id="pagetext">Le jeu devrait démarrer sous peu.</p>
+               <table id="seqtable" style="margin-left:auto;margin-right:auto;">
+                  <tr>
+                     <th> </th>
+                     <th> </th>
+                     <th> </th>
+                     <th> </th>
+                     <th> </th>
+                  </tr>
+                  <tr>
+                     <th> </th>
+                     <th> </th>
+                     <th> </th>
+                     <th> </th>
+                     <th> </th>
+                  </tr>
+               </table>
+               <form>
+                  <button id="xbutton">X</button>
+                  <button id="obutton">O</button>
+               </form>
+               <h2 id="nbseq">Séquences réécrites : 0</h3>
+               <h2 id="timeseq">Dernier temps de réécriture : 0</h3>
+         </div>
+         </th>
+         <th>
+            <div class="box2">
+               <form id='anos' action="get_results.php" method="post">
+                  <input type='checkbox' name="ano1" value="ano1" id="ano1">
+                  <label for="ano1" id="anoLabel1"></label><br><br>
+                  <input type='checkbox' name="ano2" value="ano2" id="ano2">
+                  <label for="ano2" id="anoLabel2"></label><br><br>
+                  <input type='checkbox' name="ano3" value="ano3" id="ano3">
+                  <label for="ano3" id="anoLabel3"></label><br><br>
+                  <input type='checkbox' name="ano4" value="ano4" id="ano4">
+                  <label for="ano4" id="anoLabel4"></label><br><br>
+               </form>
+            </div>
+         </th>
+      </tr>
+      <tr>
+         <th>
+            <audio controls id="audioplayer">
+            <source src="" type="audio/mpeg">
+            </audio>
+         </th>
+         <th>
+            <form>
+               <button id="prev"><-</button>
+               <button id="next">-></button>
+            </form>
+         </th>
+      </tr>
+   </table>
+</div>
+<script type="module" src="game.js"></script>
+</body>
+</html>

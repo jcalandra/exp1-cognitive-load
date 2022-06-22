@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Survey Fin d'Eval</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <div class="mainbox">
+      <h1>Questionnaire fin d'évaluation</h1>
+      <form action="get_survey.php" method="post">
+         <div>
+            <input type="number" id="age" name="age" required>
+            <label for="age">Âge</label>
+         </div>
+         <p>Genre :</p>
+         <div>
+            <input type="radio" id="genderh" name="gender" value="M" required>
+            <label for="genderh">M</label>
+         </div>
+
+         <div>
+            <input type="radio" id="genderf" name="gender" value="F" required>
+            <label for="genderf">F</label>
+         </div>
+
+         <div>
+            <input type="radio" id="gendera" name="gender" value="A" required>
+            <label for="gendera">Autre</label>
+         </div>
+         <div>
+         <p>Sur une échelle de 1 (jamais) à 7 (très souvent), à quelle fréquence diriez-vous que vous jouez à des jeux sur ordinateur ?</p>
+            <input type="radio" id="xpjv1" name="xpjv" value="1" required>
+            <label for="xpjv1">1</label>
+            <input type="radio" id="xpjv2" name="xpjv" value="2" required>
+            <label for="xpjv2">2</label>
+            <input type="radio" id="xpjv3" name="xpjv" value="3" required>
+            <label for="xpjv3">3</label>
+            <input type="radio" id="xpjv4" name="xpjv" value="4" required>
+            <label for="xpjv4">4</label>
+            <input type="radio" id="xpjv5" name="xpjv" value="5" required>
+            <label for="xpjv5">5</label>
+            <input type="radio" id="xpjv6" name="xpjv" value="6" required>
+            <label for="xpjv6">6</label>
+            <input type="radio" id="xpjv7" name="xpjv" value="7" required>
+            <label for="xpjv7">7</label>
+         </div>
+         <div>
+            <p>Sur une échelle de 1 (silencieux) à 7 (assourdissant), comment décririez-vous l'environnement sonore dans lequel vous travaillez habituellement ?<br/>(y compris si vous écoutez de la musique en travaillant)</p>
+            <input type="radio" id="xpbt1" name="xpbt" value="1" required>
+            <label for="xpbt1">1</label>
+            <input type="radio" id="xpbt2" name="xpbt" value="2" required>
+            <label for="xpbt2">2</label>
+            <input type="radio" id="xpbt3" name="xpbt" value="3" required>
+            <label for="xpbt3">3</label>
+            <input type="radio" id="xpbt4" name="xpbt" value="4" required>
+            <label for="xpbt4">4</label>
+            <input type="radio" id="xpbt5" name="xpbt" value="5" required>
+            <label for="xpbt5">5</label>
+            <input type="radio" id="xpbt6" name="xpbt" value="6" required>
+            <label for="xpbt6">6</label>
+            <input type="radio" id="xpbt7" name="xpbt" value="7" required>
+            <label for="xpbt7">7</label>
+         </div>
+         <div>
+            <p>Si vous souhaitez être tenu.e au courant des résultats de cette expérience et de ses éventuelles itérations futures, veuillez fournir une adresse e-mail : </p><input type="email" id="admail" name="admail">
+            <p>Nous garantissons l'anonymat et la confidentialité des réponses que vous fournirez à ce sondage.</p>
+         </div>
+         <input type="submit" value="Envoyer">
+      </form>
+   </div>
+</body>
+</html>

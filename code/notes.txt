@@ -1,0 +1,34 @@
+game.js
+#############################
+
+
+
+
+updateSeqDisplay?
+
+execute
+################
+cd path
+php -S 127.0.0.1:8000
+
+then open:
+http://127.0.0.1:8000/
+
+
+
+
+
+niveaux à implémenter:
+
+d'abord tests sur plusieurs étapes
+puis
+
+
+reste à faire :
+
+afficher certaines séquences en bleu + bouton skip (comment faire?)
+enregistrer les données dans un fichier texte 
+comparaison et feedback
+changer affichage boutons 
+
+afficher sur les pairs entre 5 et 22

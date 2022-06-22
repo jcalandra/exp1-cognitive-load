@@ -1,0 +1,53 @@
+.mainbox {
+  margin: auto;
+  width: 50em;
+  border: 1px solid #333;
+}
+
+.box1 {
+  width: 35em;
+}
+
+.box2 {
+  width: 12em;
+}
+
+
+input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  transform: scale(2);
+  padding: 10px;
+}
+
+label[for=ano1], label[for=ano2], label[for=ano3], label[for=ano4]
+{
+  /* Checkbox text */
+  font-size: 150%;
+  display: inline;
+}
+
+th{
+  height: 40px;
+  width: 40px;
+  padding: 8px 8px;
+  border: 1px solid black;
+  margin-left: auto;
+}
+
+button{
+  padding: 8px 12px;
+}
+
+p {
+  text-align: left;
+  font-size: 20px;
+}
+
+h1, h2, h3 {
+  text-align: left;
+}
