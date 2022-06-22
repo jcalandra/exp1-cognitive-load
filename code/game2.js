@@ -15,7 +15,7 @@ var pageText = document.getElementById('pagetext');
 var anomArray = document.querySelectorAll('div.box2 > form')[0]; //tableau HTML des anomalies
 var anomLabels = document.querySelectorAll('label');
 var formNasa = document.getElementById('formNasa');
-var nasaButton = formNasa.children[0];
+var nasaButton = document.getElementById('nasaButton');
 
 
 //the ID defining which sounds folder you go into
@@ -163,7 +163,7 @@ function updateDisplay(){
          }
          else{
             revealElement(formNasa);
-            hideElement(nextButton);
+            //hideElement(nextButton);
          }
       break;
 
@@ -201,7 +201,7 @@ function updateDisplay(){
             hideElement(anomLabels[i]);
          }
          hideElement(prevButton);
-         hideElement(nextButton);
+         //hideElement(nextButton);
          revealElement(pageTitle);
          revealElement(pageText);
          revealElement(audioPlayer);
@@ -235,10 +235,6 @@ audioPlayer.onplay = function(){
    level.seqTimer = Date.now();
 };
 
-nasaButton.onclick = function(){
-   revealElement(nextButton);
-   formNasa.innerHTML = (lvlCount!=22?"<br/><br/>Cliquez sur le bouton '->' pour passer au prochain niveau":"Cliquez sur le bouton '->' pour terminer l'évalutaion") + "<br/> <br/>  Assurez vous d'avoir bien rempli le formulaire avant de passer à la suite "
-}
 
 async function fetchgo(data){
   console.log(data.toString());
@@ -365,8 +361,7 @@ function resetLevel(){
       break;
       case 24 :
          //location.replace("survey.html?resid="+fileId+"&ecoid="+ecoID);
-         if(ecoID==1) location.replace("https://forms.gle/wBCanCqvDEMueGmw6");
-         else if(ecoID==2) location.replace("https://forms.gle/zJh7Eryyb39J5w2B6");
+         location.assign("survey.html");
       break;
       default:
          if(lvlCount >= 5 && lvlCount <= 22){
@@ -377,7 +372,7 @@ function resetLevel(){
             } //lvlCount impair -> exercice
             else{
                pageTitle.textContent = "Bilan Niveau "+((lvlCount-2)/2-1);
-               pageText.innerHTML = endLvlText(true);
+               pageText.innerHTML = endLvlText(true) + (lvlCount!=22?"<br/><br/>Cliquez sur le bouton '->' pour passer au prochain niveau":"<br/><br/>Cliquez sur le bouton '->' pour terminer l'évalutaion") + "<br/> <br/>  Assurez vous d'avoir bien rempli le formulaire avant de passer à la suite ";
                level = new Level('next_pressed', -1);
             } //lvlCount pair -> bilan de l'exercice
          }
