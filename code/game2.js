@@ -328,6 +328,7 @@ function resetLevel(){
    switch(lvlCount){
       case 0 :
          init_new_resfile();
+         nasaButton.href="NASA.html?ecoid="+ecoID+"&resid="+fileId;
          shuffleArray(songsArray);
          writeEco();
          console.log("ordre", songsArray);
@@ -560,3 +561,6 @@ fetchEco().then(function(response){
     ecoID = parseInt(response, 10);
     resetLevel();
 });
+
+export {ecoID};
+export {fileId};
