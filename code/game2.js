@@ -22,9 +22,9 @@ var sectionText = document.getElementById('sectionText');
 //the ID defining which sounds folder you go into
 var ecoID=2;
 console.log("le type d'ecoID est:"+typeof ecoID);
-var level; //niveau d'avancée dans les experiences 
+var level; //niveau d'avancée dans les experiences
 var lvlCount = 0; //numéro du niveau qui atttribue des propriétés aux niveaux
-var finalPercent = 0; 
+var finalPercent = 0;
 var songsArray = [1, 2, 3, 4, 5, 6, 7, 8, 9]; //ID des musiques de test
 
 var fileId = 0;//identifiant fichier de réponse utilisateur coté JS
@@ -57,7 +57,7 @@ function getRandomSign() {
 }
 
 
-function getRandomLength() { //renvoie une longueur random pour les séquences 
+function getRandomLength() { //renvoie une longueur random pour les séquences
    return Math.floor(Math.random() * 4) + 2;
 }
 
@@ -73,7 +73,7 @@ function shuffleArray(array) { //mélange un tableau
      array[j] = temp;
    }
 }
- 
+
 
 function newSequence() {  //crée une nouvelle séquence et initialise le timer à 0
    var seq = [];
@@ -90,7 +90,7 @@ function newSequence() {  //crée une nouvelle séquence et initialise le timer 
       seq.push(sign);
    }
    level.seqTimer = Date.now();
-   return seq; 
+   return seq;
 }
 
 function hideElement(element){
@@ -244,7 +244,7 @@ audioPlayer.onplay = function(){
 
 async function fetchgo(data){
   console.log(data.toString());
-  //return true;  
+  //return true;
 
   data.append("fileId", fileId);
   data.append("ecoId", ecoID);
@@ -302,7 +302,7 @@ function anomToString(anomArray){
    return txt;
 }
 
-function successPercent(){ //pourcentage de réussite 
+function successPercent(){ //pourcentage de réussite
    var perc = 0.0;
    for(let i = 0; i < level.checkedAnomalies.length; i++){
       if((level.checkedAnomalies[i]==-1) && (level.expectedAnomalies[i]==-1) || (level.checkedAnomalies[i]!=-1) && (level.expectedAnomalies[i]!=-1)){
@@ -312,12 +312,12 @@ function successPercent(){ //pourcentage de réussite
    return perc/level.checkedAnomalies.length;
 }
 
-function endLvlText(inTraining){ //affichage du texte des séquences reproduites 
+function endLvlText(inTraining){ //affichage du texte des séquences reproduites
    var txt = "Vous avez reproduit "+ level.seqCount +" séquences ("+ level.symCount +" symboles) en "+ (Math.floor((Date.now() - level.anomTimer)/10)*0.01).toFixed(0) +"s"+ "<br/>Votre réponse est à "+ successPercent() + "% correcte.";
    return txt;
 }
 
-function pickTrack(){ //choisit un random track qui n'a jamais été choisi 
+function pickTrack(){ //choisit un random track qui n'a jamais été choisi
    let i = Math.floor(Math.random() * 10);
    while(trackPicked[i]!=0){
       i = Math.floor(Math.random() * 10);
@@ -367,7 +367,7 @@ function resetLevel(){
       break;
       case 24 :
          //location.replace("survey.html?resid="+fileId+"&ecoid="+ecoID);
-         location.assign("survey.html");
+         location.assign("survey.html?resid="+fileId+"&ecoid="+ecoID);
       break;
       default:
          if(lvlCount >= 5 && lvlCount <= 22){
@@ -412,7 +412,7 @@ function prevLevel(){//niveau précédent
 }
 
 
-audioPlayer.onended = async function(){ //jsp trop 
+audioPlayer.onended = async function(){ //jsp trop
    if(audioPlayer.controls == false){
       let data = new URLSearchParams();
       for(let i = 0; i < anomArray.length; i++){
@@ -431,7 +431,7 @@ audioPlayer.onended = async function(){ //jsp trop
 
 function writeTime(level, button){//note le temps de click de la phrase ou section
    //let data = new URLSearchParams();
-   //data.append("lvlsize", level.fullSeq.length);      
+   //data.append("lvlsize", level.fullSeq.length);
    //data.append(button, Date.now()-level.seqTimer);
    //fetchgo(data);
    if(button==="section") {
@@ -569,4 +569,3 @@ fetchEco().then(function(response){
     ecoID = parseInt(response, 10);
     resetLevel();
 });
-
