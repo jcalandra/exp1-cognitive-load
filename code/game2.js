@@ -22,9 +22,9 @@ var sectionText = document.getElementById('sectionText');
 //the ID defining which sounds folder you go into
 var ecoID=2;
 console.log("le type d'ecoID est:"+typeof ecoID);
-var level; //niveau d'avancée dans les experiences 
+var level; //niveau d'avancée dans les experiences
 var lvlCount = 0; //numéro du niveau qui atttribue des propriétés aux niveaux
-var finalPercent = 0; 
+var finalPercent = 0;
 var songsArray = [1, 2, 3, 4, 5, 6, 7, 8, 9]; //ID des musiques de test
 
 var fileId = 0;//identifiant fichier de réponse utilisateur coté JS
@@ -57,7 +57,7 @@ function getRandomSign() {
 }
 
 
-function getRandomLength() { //renvoie une longueur random pour les séquences 
+function getRandomLength() { //renvoie une longueur random pour les séquences
    return Math.floor(Math.random() * 4) + 2;
 }
 
@@ -73,7 +73,7 @@ function shuffleArray(array) { //mélange un tableau
      array[j] = temp;
    }
 }
- 
+
 
 function newSequence() {  //crée une nouvelle séquence et initialise le timer à 0
    var seq = [];
@@ -90,7 +90,7 @@ function newSequence() {  //crée une nouvelle séquence et initialise le timer 
       seq.push(sign);
    }
    level.seqTimer = Date.now();
-   return seq; 
+   return seq;
 }
 
 function hideElement(element){
@@ -244,7 +244,7 @@ audioPlayer.onplay = function(){
 
 async function fetchgo(data){
   console.log(data.toString());
-  //return true;  
+  //return true;
 
   data.append("fileId", fileId);
   data.append("ecoId", ecoID);
@@ -317,7 +317,7 @@ function endLvlText(inTraining){ //affichage du texte des séquences reproduites
    return txt;
 }
 
-function pickTrack(){ //choisit un random track qui n'a jamais été choisi 
+function pickTrack(){ //choisit un random track qui n'a jamais été choisi
    let i = Math.floor(Math.random() * 10);
    while(trackPicked[i]!=0){
       i = Math.floor(Math.random() * 10);
@@ -411,7 +411,7 @@ function prevLevel(){//niveau précédent
 }
 
 
-audioPlayer.onended = async function(){ //jsp trop 
+audioPlayer.onended = async function(){ //jsp trop
    if(audioPlayer.controls == false){
       let data = new URLSearchParams();
       await fetchgo(data);
@@ -426,7 +426,7 @@ audioPlayer.onended = async function(){ //jsp trop
 
 function writeTime(level, button){//note le temps de click de la phrase ou section
    //let data = new URLSearchParams();
-   //data.append("lvlsize", level.fullSeq.length);      
+   //data.append("lvlsize", level.fullSeq.length);
    //data.append(button, Date.now()-level.seqTimer);
    //fetchgo(data);
    if(button==="section") {
@@ -548,4 +548,3 @@ fetchEco().then(function(response){
     ecoID = parseInt(response, 10);
     resetLevel();
 });
-
