@@ -19,9 +19,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 fwrite($answers,";");
              }
         if(!empty($_POST["nasa"])){
-                     fwrite($answers,"questionnaire NASA_TLX: ".$_POST["nasa"]);
-                     fwrite($answers,";");
-              }
+                  fwrite($answers,"questionnaire NASA_TLX: ".$_POST["nasa"]);
+                  fwrite($answers,";");
+            }
 
         fwrite($answers,"\n");
         fclose($answers);

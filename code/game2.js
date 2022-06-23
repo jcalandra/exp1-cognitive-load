@@ -21,7 +21,7 @@ var phraseText = document.getElementById('phraseText');
 var sectionText = document.getElementById('sectionText');
 
 //the ID defining which sounds folder you go into
-var ecoID=2;
+var ecoID=1;
 console.log("le type d'ecoID est:"+typeof ecoID);
 var level; //niveau d'avancée dans les experiences
 var lvlCount = 0; //numéro du niveau qui atttribue des propriétés aux niveaux

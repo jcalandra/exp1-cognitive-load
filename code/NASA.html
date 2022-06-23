@@ -70,14 +70,9 @@ var pair_num = 0;
 for (var i = 0; i < NUM_SCALES; i++)
 	results_tally[i] = 0;
 
-async function fetchgo(data)
+async function fetchgo2(data)
 {
 	  console.log(data.toString());
-	  //return true;
-
-		//TODO: importer les bonnes valeurs pour fileId et ecoID
-	  data.append("fileId", game2.fileId);
-	  data.append("ecoId", game2.ecoID);
 
 	  fetch("get_results.php", {
 	    method: 'post',
@@ -321,10 +316,9 @@ function nextPair()
 		document.getElementById('div_part3').style.display = 'none';
 		document.getElementById('div_part4').style.display = '';
 		calcResults();
-		//TODO: à décommenter quand les ids sont ok
-		/*let data = new URLSearchParams();
+		let data = new URLSearchParams();
 		data.append("nasa", getResult());
-		fetchgo(data);*/
+		fetchgo2(data);
 		document.getElementById('div_part4').innerHTML = getResultsHTML();
 	}
 	else
