@@ -18,12 +18,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 fwrite($answers,"tableau des sections: ".$_POST["sections"]);
                 fwrite($answers,";");
              }
-	/*for($i = 1; $i <= 4; $i++){
-           if(!empty($_POST["ano".$i])) {
-		fwrite($answers,$_POST["ano".$i]);
-		fwrite($answers,";");
-           }
-	}*/
+        if(!empty($_POST["nasa"])){
+                     fwrite($answers,"questionnaire NASA_TLX: ".$_POST["nasa"]);
+                     fwrite($answers,";");
+              }
+
         fwrite($answers,"\n");
         fclose($answers);
 }
