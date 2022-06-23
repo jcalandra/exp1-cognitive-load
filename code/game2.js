@@ -3,6 +3,7 @@ import { Level } from "./level2.js";
 var audioPlayer = document.getElementById('audioplayer');
 var oButton = document.getElementById('obutton');
 var xButton = document.getElementById('xbutton');
+var skipButton = document.getElementById('skipbutton');
 //var phrase = document.getElementById('phrase');
 //var section = document.getElementById('section');
 var nextButton = document.getElementById('next');
@@ -26,6 +27,7 @@ var level; //niveau d'avancée dans les experiences
 var lvlCount = 0; //numéro du niveau qui atttribue des propriétés aux niveaux
 var finalPercent = 0;
 var songsArray = [1, 2, 3, 4, 5, 6, 7, 8, 9]; //ID des musiques de test
+var blue = 0;
 
 var fileId = 0;//identifiant fichier de réponse utilisateur coté JS
 
@@ -61,8 +63,8 @@ function getRandomLength() { //renvoie une longueur random pour les séquences
    return Math.floor(Math.random() * 4) + 2;
 }
 
-function getSkipValue() { //pour les séquences à mettre en bleu
-   return (Math.random() < 0.2);
+function SkipValue() { //pour les séquences à mettre en bleu
+   blue = (Math.random() < 0.2);
 }
 
 function shuffleArray(array) { //mélange un tableau
@@ -77,6 +79,7 @@ function shuffleArray(array) { //mélange un tableau
 
 function newSequence() {  //crée une nouvelle séquence et initialise le timer à 0
    var seq = [];
+   SkipValue();
    var length = getRandomLength();
    for(let i = 0; i < length; i++){
       var sign = "";
@@ -111,6 +114,12 @@ function updateSeqDisplay(){ //affiche une nouvelle séquence (?)
    for(let i = 0; i < 5; i++){
       if(level.fullSeq[i] !== undefined){
          seqDisplayer[0].children[i].textContent = level.fullSeq[i];
+         if(blue){
+            (seqDisplayer[0].children[i]).setAttribute("style", "color:blue");
+         }
+         else{
+            (seqDisplayer[0].children[i]).setAttribute("style", "color:black");
+         }
          revealElement(seqDisplayer[0].children[i]);
          seqDisplayer[1].children[i].textContent = level.userSeq[i];
          revealElement(seqDisplayer[1].children[i]);
@@ -135,6 +144,7 @@ function updateDisplay(){
          hideElement(anomArray);
          hideElement(oButton);
          hideElement(xButton);
+         hideElement(skipButton);
          hideElement(seqDisplayer[0]);
          hideElement(seqDisplayer[1]);
          hideElement(seqCountDisplay);
@@ -173,6 +183,7 @@ function updateDisplay(){
          hideElement(anomArray);
          revealElement(oButton);
          revealElement(xButton);
+         revealElement(skipButton);
          revealElement(seqDisplayer[0]);
          revealElement(seqDisplayer[1]);
          revealElement(seqCountDisplay);
@@ -195,6 +206,7 @@ function updateDisplay(){
          hideElement(anomArray);
          hideElement(oButton);
          hideElement(xButton);
+         hideElement(skipButton);
          hideElement(seqDisplayer[0]);
          hideElement(seqDisplayer[1]);
          hideElement(formNasa);
@@ -223,6 +235,7 @@ audioPlayer.onplay = function(){
    if(level.resolutionType != 'next_pressed' && ecoID===1) {
       revealElement(oButton);
       revealElement(xButton);
+      revealElement(skipButton);
       revealElement(seqDisplayer[0]);
       revealElement(seqDisplayer[1]);
       revealElement(seqCountDisplay);
@@ -286,21 +299,6 @@ function anomIdToStr(id){ //renvoie l'anomalie selon son id et l'ecoID
    }
 }
 
-function anomToString(anomArray){
-   var txt = "";
-
-   for(let i = 0; i < anomArray.length; i++){
-      if(anomArray[i] != -1){
-         txt += ((txt=="")?"":", ") + anomIdToStr(i);
-      }
-   }
-
-   if(txt == "") txt = "Aucune";
-
-   txt += ".";
-
-   return txt;
-}
 
 /*function successPercent(){ //pourcentage de réussite 
    var perc = 0.0;
@@ -441,12 +439,23 @@ function writeTime(level, button){//note le temps de click de la phrase ou secti
 
 
 function checkSign(level, sign){//ajoute un symbole dans la case
-   //if(ecoID===2 || level.resolutionType != "sound_played" ){
    var curPos = level.userSeq.length;
-   if(level.fullSeq[curPos] == sign){
+   if(level.fullSeq[curPos] == sign && blue==0){
       level.userSeq.push(sign);
       level.symCount += 1;
       updateSeqDisplay();
+   }
+   if(blue==1 && sign=="skip"){
+      let data = new URLSearchParams();
+      data.append("lvlsize", 0);
+      data.append("lvltime", Date.now()-level.seqTimer);
+      fetchgo(data);
+      level.seqCount++;
+      updateSeqCountDisplay();
+      level.fullSeq = newSequence();
+      level.userSeq = [];
+      updateSeqDisplay();
+      level.seqTimer = Date.now();
    }
    if(level.fullSeq.length == level.userSeq.length){
       let data = new URLSearchParams();
@@ -464,7 +473,6 @@ function checkSign(level, sign){//ajoute un symbole dans la case
    if(level.resolutionType == 'seqs_solved' && level.seqCount >= 10){
       revealElement(nextButton);
    }
-//}
 }
 
 oButton.onclick = function(event){
@@ -477,6 +485,10 @@ xButton.onclick = function(event){
    checkSign(level, "X");
 };
 
+skipButton.onclick = function(event){
+   event.preventDefault();
+   checkSign(level, "skip");
+}
 
 document.onkeydown = function(e) {
    var key = e.key;
