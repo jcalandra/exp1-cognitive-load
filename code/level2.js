@@ -39,7 +39,7 @@ export class Level {
       this.sectionCount = 0;
       this.phraseCount = 0;
       this.sectionArray = [];
-      this.sectionCount = [];
+      this.phraseArray = [];
       this.fullSeq = []; //séquence de X et O pour le level
       this.userSeq = []; //séquence que l'utilisateur rentre
 

@@ -12,11 +12,12 @@ var seqCountDisplay = document.getElementById('nbseq');
 var seqTimeDisplay = document.getElementById('timeseq');
 var pageTitle = document.getElementById('pagetitle');
 var pageText = document.getElementById('pagetext');
-var anomArray = document.querySelectorAll('div.box2 > form')[0]; //tableau HTML des anomalies
+var anomArray = document.querySelectorAll('div.box2 > div.column')[0]; //tableau HTML des anomalies
 var anomLabels = document.querySelectorAll('label');
 var formNasa = document.getElementById('formNasa');
 var nasaButton = document.getElementById('nasaButton');
-
+var phraseText = document.getElementById('phraseText');
+var sectionText = document.getElementById('sectionText');
 
 //the ID defining which sounds folder you go into
 var ecoID=2;
@@ -131,6 +132,7 @@ function updateSeqCountDisplay(){
 function updateDisplay(){
    switch(level.resolutionType){
       case 'next_pressed':
+         hideElement(anomArray);
          hideElement(oButton);
          hideElement(xButton);
          hideElement(seqDisplayer[0]);
@@ -145,8 +147,8 @@ function updateDisplay(){
             revealElement(prevButton);
          else
             hideElement(prevButton);
-         revealElement(pageTitle);
-         revealElement(pageText);
+            revealElement(pageTitle);
+            revealElement(pageText);
          if(level.soundId != -1){
             revealElement(audioPlayer);
             audioPlayer.src = 'sounds'+ecoID+'/track_'+level.soundId+'.mp3';
@@ -168,6 +170,7 @@ function updateDisplay(){
       break;
 
       case 'seqs_solved':
+         hideElement(anomArray);
          revealElement(oButton);
          revealElement(xButton);
          revealElement(seqDisplayer[0]);
@@ -189,6 +192,7 @@ function updateDisplay(){
       break;
 
       case 'sound_played':
+         hideElement(anomArray);
          hideElement(oButton);
          hideElement(xButton);
          hideElement(seqDisplayer[0]);
@@ -231,14 +235,16 @@ audioPlayer.onplay = function(){
       revealElement(anomArray[i]);
       revealElement(anomLabels[i]);
    }
+   revealElement(anomArray);
    level.anomTimer = Date.now();
    level.seqTimer = Date.now();
-};
-
+   (level.phraseArray).push(0);
+   (level.sectionArray).push(0);
+}
 
 async function fetchgo(data){
   console.log(data.toString());
-  return true; //arrêt d'enregistrement des données 
+  //return true;  
 
   data.append("fileId", fileId);
   data.append("ecoId", ecoID);
@@ -330,13 +336,13 @@ function resetLevel(){
          //setupCheckboxLabels();
          level = new Level('next_pressed', -1);
          pageTitle.textContent = "Bienvenue!"
-         pageText.innerHTML = "Merci beaucoup de participer à notre expérience. Ce jeu a pour but d'étudier le phénomène de perception musicale. Votre rôle sera le suivant: <ol> <li> Tout d'abord, vous répondrez à quelques questions de routine qui permettront une analyse fiable de vos résultats </li> <li> Dans la deuxième partie de l'étude vous seront présentés quelques fragments musicaux et nous vous demanderons de les segmenter d'une manière qui vous semble intuivite. </li> <li> Après chaque pièce musicale, vous remplirez un court questionnaire qui nous aidera à évaluer votre effort lors de l'exécution de la tache </li> </ol> Vos performances et résultats sont totalement anonymes et vous ne serez en aucun cas lié à vos réponses. <br/> <br/> Si vous souhaitez avoir plus de détails sur l'expérimentation, n'hésitez pas à nous laisser votre adresse email à la fin de l'enquête." ;
+         pageText.innerHTML = "Merci pour votre participation à cette expérience! Ce jeu a pour but d'étudier le phénomène de perception musicale. Votre rôle sera le suivant: <ol> <li> Tout d'abord, vous répondrez à quelques questions de routine qui permettront une analyse fiable de vos résultats </li> <li> Dans la deuxième partie de l'étude vous seront présentés quelques fragments musicaux et nous vous demanderons de les segmenter d'une manière qui vous semble intuivite. </li> <li> Après chaque pièce musicale, vous remplirez un court questionnaire qui nous aidera à évaluer votre effort lors de l'exécution de la tache </li> </ol> Vos performances et résultats sont totalement anonymes et vous ne serez en aucun cas lié à vos réponses. <br/> <br/> Si vous souhaitez avoir plus de détails sur l'expérimentation, n'hésitez pas à nous laisser votre adresse email à la fin de l'enquête." ;
       break;
       case 1:
          level = new Level('next_pressed', -1);
          pageTitle.textContent = "Explications";
          console.log("ecoID vaut"+ ecoID);
-         pageText.innerHTML = ("<br/>Dans un instant, vous écouterez neuf pièces musicales. Votre tâche est de vous concentrer sur les morceaux que vous entendrez et, chaque fois que vous pensez pouvoir entendre la fin d'une phrase musicale, pressez la touche T de votre clavier. Chaque fois que vous pensez entendre la fin d'une partie musicale plus longue, une section/période musicale, pressez la touche G du clavier. <br/> "+((ecoID===1)?"<br/>En parallèle, vous jouerez à un jeu simple. Votre tâche sera de répéter des schémas simples de \"X\" et \"O\" afin qu'ils correspondent à l'image affichée. <br/> Attention! Si la séquence présentée est écrite en bleu - vous ne devrez pas la copier! Appuyez sur le button SKIP au lieu de la recopier! <br/>":"")+"<br/> La <u> phrase musicale </u> est comme une phrase linguistique - c'est une pensée, mais véhiculée par la musique. <br/> Une <u> section musicale </u> est cependant une partie plus grande, comme une histoire, une ambiance. <br/> <br/> Essayez de suivre vos intuitions en distinguant les deux. Bonne chance !");
+         pageText.innerHTML = ("<br/>Dans un instant, vous écouterez neuf pièces musicales. Votre tâche est de vous concentrer sur les morceaux que vous entendrez et, chaque fois que vous pensez pouvoir entendre la fin d'une phrase musicale, pressez la touche G de votre clavier. Chaque fois que vous pensez entendre la fin d'une partie musicale plus longue, une section/période musicale, pressez la barre espace du clavier. <br/> "+((ecoID===1)?"<br/>En parallèle, vous jouerez à un jeu simple. Votre tâche sera de répéter des schémas simples de \"X\" et \"O\" afin qu'ils correspondent à l'image affichée. <br/> Attention! Si la séquence présentée est écrite en bleu - vous ne devrez pas la copier! Appuyez sur le button SKIP au lieu de la recopier! <br/>":"")+"<br/> La <u> phrase musicale </u> est comme une phrase linguistique - c'est une pensée, mais véhiculée par la musique. <br/> Une <u> section musicale </u> est cependant une partie plus grande, comme une histoire, une ambiance. <br/> <br/> Essayez de suivre vos intuitions en distinguant les deux. Bonne chance !");
       break;
       case 2 :
          level = new Level('next_pressed', -1);
@@ -429,11 +435,11 @@ function writeTime(level, button){//note le temps de click de la phrase ou secti
    //data.append(button, Date.now()-level.seqTimer);
    //fetchgo(data);
    if(button==="section") {
-      sectionArray.append(Date.now()-level.anomTimer)
+      (level.sectionArray).push(Date.now()-level.anomTimer)
       level.sectionCount++;
    }
    if(button==="phrase") {
-      phraseArray.append(Date.now()-level.anomTimer)
+      (level.phraseArray).push(Date.now()-level.anomTimer)
       level.phraseCount++;
    }
 }
@@ -479,12 +485,28 @@ xButton.onclick = function(event){
 
 document.onkeydown = function(e) {
    var key = e.key;
-   //ajouter des conditions sur lvlcount pour être sûr qu'on est dans une experience
-   if(key == 84){ //touche t du clavier
-      checkTime(level, "phrase");
+   if(lvlCount==3 || lvlCount >= 5 && lvlCount <= 22 && lvlCount % 2 != 0){
+      if(key == 't'){ //touche t du clavier
+         writeTime(level, "phrase");
+         phraseText.setAttribute('style', 'color:red;text-align:center');
+      }
+      if(key == 'g'){ //touche g du clavier
+         writeTime(level, "section");
+         writeTime(level, "phrase");
+         sectionText.setAttribute('style', 'color:red;text-align:center');
+      }
    }
-   if(key == 71){ //touche g du clavier
-      checkTime(level, "section");
+}
+
+document.onkeyup = function(e) {
+   var key = e.keyCode;
+   if(lvlCount==3 || lvlCount >= 5 && lvlCount <= 22 && lvlCount % 2 != 0){
+      if(key == 84){ //touche t du clavier
+         phraseText.setAttribute('style', 'color:black;text-align:center');
+      }
+      if(key == 71){ //touche g du clavier
+         sectionText.setAttribute('style', 'color:black;text-align:center');
+      }
    }
 }
 

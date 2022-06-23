@@ -1,25 +1,38 @@
 <?php
 
         $url_components = parse_url($_SERVER['HTTP_REFERER']);
+        print_r($url_components);
         parse_str($url_components['query'], $params);
         $fileid = $params['resid'];
-				$ecoid = $params['ecoid'];
+		   $ecoid = $params['ecoid'];
 
         $answers = fopen("data".$ecoid."/resultats_".$fileid.".csv", "a");
         if(!empty($_POST["age"])){
-           fwrite($answers,$_POST["age"]);
+           fwrite($answers,"Age;".$_POST["age"]);
            fwrite($answers,"\n");
         }
         if(!empty($_POST["gender"])){
-           fwrite($answers,$_POST["gender"]);
+           fwrite($answers,"Genre;".$_POST["gender"]);
            fwrite($answers,"\n");
         }
-        if(!empty($_POST["xpjv"])){
-           fwrite($answers,"Jamais/Tres souvent;".$_POST["xpjv"]);
+        if(!empty($_POST["fm"])){
+           fwrite($answers,"Durée formation musicale;".$_POST["fm"]);
            fwrite($answers,"\n");
         }
-        if(!empty($_POST["xpbt"])){
-           fwrite($answers,"Silencieux/Assourdissant;".$_POST["xpbt"]);
+        if(!empty($_POST["dpi"])){
+           fwrite($answers,"Durée pratique d'un instrument;".$_POST["dpi"]);
+           fwrite($answers,"\n");
+        }
+        if(!empty($_POST["pm"])){
+           fwrite($answers,"Pratique musicale actuelle;".$_POST["pmo"]);
+           fwrite($answers,"\n");
+        }
+        if(!empty($_POST["ptm"])){
+           fwrite($answers,"Fréquence/semaine;".$_POST["ptm"]);
+           fwrite($answers,"\n");
+        }
+        if(!empty($_POST["pa"])){
+           fwrite($answers,"Problème d'audition;".$_POST["pa"]);
            fwrite($answers,"\n");
         }
         if(!empty($_POST["admail"])){
