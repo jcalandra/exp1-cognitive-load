@@ -252,13 +252,13 @@ async function fetchgo(data){
   fetch("get_results.php", {
     method: 'post',
     body: data
-  })/*
+  })
   .then(function (response) {
      return response.text();
   })
   .then(function (text) {
     console.log(text);
-  })*/
+  })
   .catch(function (error) {
     console.log(error)
   });
@@ -302,7 +302,7 @@ function anomToString(anomArray){
    return txt;
 }
 
-function successPercent(){ //pourcentage de réussite 
+/*function successPercent(){ //pourcentage de réussite 
    var perc = 0.0;
    for(let i = 0; i < level.checkedAnomalies.length; i++){
       if((level.checkedAnomalies[i]==-1) && (level.expectedAnomalies[i]==-1) || (level.checkedAnomalies[i]!=-1) && (level.expectedAnomalies[i]!=-1)){
@@ -310,10 +310,10 @@ function successPercent(){ //pourcentage de réussite
       }
    }
    return perc/level.checkedAnomalies.length;
-}
+}*/
 
 function endLvlText(inTraining){ //affichage du texte des séquences reproduites 
-   var txt = "Vous avez reproduit "+ level.seqCount +" séquences ("+ level.symCount +" symboles) en "+ (Math.floor((Date.now() - level.anomTimer)/10)*0.01).toFixed(0) +"s"+ "<br/>Votre réponse est à "+ successPercent() + "% correcte.";
+   var txt = "Vous avez reproduit "+ level.seqCount +" séquences ("+ level.symCount +" symboles) en "+ (Math.floor((Date.now() - level.anomTimer)/10)*0.01).toFixed(0) +"s" /*+ "<br/>Votre réponse est à "+ successPercent() + "% correcte."*/;
    return txt;
 }
 
@@ -366,8 +366,7 @@ function resetLevel(){
          level = new Level('next_pressed', -1);
       break;
       case 24 :
-         //location.replace("survey.html?resid="+fileId+"&ecoid="+ecoID);
-         location.assign("survey.html");
+         location.assign("survey.html?resid="+fileId+"&ecoid="+ecoID);
       break;
       default:
          if(lvlCount >= 5 && lvlCount <= 22){
@@ -415,14 +414,10 @@ function prevLevel(){//niveau précédent
 audioPlayer.onended = async function(){ //jsp trop 
    if(audioPlayer.controls == false){
       let data = new URLSearchParams();
-      for(let i = 0; i < anomArray.length; i++){
-         data.append(anomArray[i].name, level.expectedAnomalies[i]);
-      }
       await fetchgo(data);
       data = new URLSearchParams();
-      for(let i = 0; i < anomArray.length; i++){
-         data.append(anomArray[i].name, level.checkedAnomalies[i]);
-      }
+      data.append("sections", level.sectionArray);
+      data.append("phrases", level.phraseArray);
       await fetchgo(data);
       nextLevel();
    }
@@ -521,22 +516,6 @@ prevButton.onclick = function(event){
    prevLevel();
 }
 
-/*for(let i = 0; i < anomArray.length; i++){
-   anomArray[i].onclick = function(){
-      var time = Date.now()-level.anomTimer;
-      if(anomArray[i].checked)
-      	{
-           //console.log("Checked anom "+ i +" at time : "+ time +".");
-           level.checkedAnomalies[i] = time;
-        }
-      else
-        {
-           //console.log("Unchecked anom "+ i +" at time : "+ time +".");
-           level.checkedAnomalies[i] = -1;
-        }
-      //console.log(level.checkedAnomalies);
-   }
-}*/
 
 function setupCheckboxLabels(){
   for(var i = 1; i <= 2; i++){

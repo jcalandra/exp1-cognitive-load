@@ -29,6 +29,6 @@ reste à faire :
 afficher certaines séquences en bleu + bouton skip (comment faire?)
 enregistrer les données dans un fichier texte 
 comparaison et feedback
-changer affichage boutons 
+changer traduction
 
-afficher sur les pairs entre 5 et 22
+

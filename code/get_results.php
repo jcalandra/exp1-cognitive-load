@@ -10,12 +10,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
            fwrite($answers,"track".$_POST["trackid"]);
            fwrite($answers,";");
         }
-	for($i = 1; $i <= 4; $i++){
+        if(!empty($_POST["phrases"])){
+                fwrite($answers,"tableau des phrases: ".$_POST["phrases"]);
+                fwrite($answers,";");
+             }
+        if(!empty($_POST["sections"])){
+                fwrite($answers,"tableau des sections: ".$_POST["sections"]);
+                fwrite($answers,";");
+             }
+	/*for($i = 1; $i <= 4; $i++){
            if(!empty($_POST["ano".$i])) {
 		fwrite($answers,$_POST["ano".$i]);
 		fwrite($answers,";");
            }
-	}
+	}*/
         fwrite($answers,"\n");
         fclose($answers);
 }

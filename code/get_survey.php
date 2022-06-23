@@ -1,7 +1,6 @@
 <?php
 
         $url_components = parse_url($_SERVER['HTTP_REFERER']);
-        print_r($url_components);
         parse_str($url_components['query'], $params);
         $fileid = $params['resid'];
 		   $ecoid = $params['ecoid'];
