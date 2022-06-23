@@ -300,7 +300,7 @@ function anomIdToStr(id){ //renvoie l'anomalie selon son id et l'ecoID
 }
 
 
-/*function successPercent(){ //pourcentage de réussite 
+/*function successPercent(){ //pourcentage de réussite
    var perc = 0.0;
    for(let i = 0; i < level.checkedAnomalies.length; i++){
       if((level.checkedAnomalies[i]==-1) && (level.expectedAnomalies[i]==-1) || (level.checkedAnomalies[i]!=-1) && (level.expectedAnomalies[i]!=-1)){
@@ -310,7 +310,7 @@ function anomIdToStr(id){ //renvoie l'anomalie selon son id et l'ecoID
    return perc/level.checkedAnomalies.length;
 }*/
 
-function endLvlText(inTraining){ //affichage du texte des séquences reproduites 
+function endLvlText(inTraining){ //affichage du texte des séquences reproduites
    var txt = "Vous avez reproduit "+ level.seqCount +" séquences ("+ level.symCount +" symboles) en "+ (Math.floor((Date.now() - level.anomTimer)/10)*0.01).toFixed(0) +"s" /*+ "<br/>Votre réponse est à "+ successPercent() + "% correcte."*/;
    return txt;
 }
