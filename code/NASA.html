@@ -25,10 +25,12 @@ async function fetchEco(){
 
 fetchID().then(function(response){
     fileId=parseInt(response, 10);
+	fileId=fileId.toString();
 });
 
 fetchEco().then(function(response){
     ecoID=parseInt(response, 10);
+	ecoID=ecoID.toString();
 });
 
 
