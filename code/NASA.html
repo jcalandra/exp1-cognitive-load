@@ -24,11 +24,11 @@ async function fetchEco(){
 }
 
 fetchID().then(function(response){
-    fileId = response;
+    fileId=parseInt(response, 10);
 });
 
 fetchEco().then(function(response){
-    ecoID = response;
+    ecoID=parseInt(response, 10);
 });
 
 
