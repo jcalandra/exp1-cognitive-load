@@ -23,7 +23,7 @@
            fwrite($answers,"\n");
         }
         if(!empty($_POST["pm"])){
-           fwrite($answers,"Pratique musicale actuelle;".$_POST["pmo"]);
+           fwrite($answers,"Pratique musicale actuelle;".$_POST["pm"]);
            fwrite($answers,"\n");
         }
         if(!empty($_POST["ptm"])){

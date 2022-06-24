@@ -232,7 +232,7 @@ function updateDisplay(){
 
 audioPlayer.onplay = function(){
    audioPlayer.controls = false;
-   if(level.resolutionType != 'next_pressed' && ecoID===1) {
+   if(level.resolutionType != 'next_pressed' && ecoID==1) {
       revealElement(oButton);
       revealElement(xButton);
       revealElement(skipButton);
@@ -266,7 +266,7 @@ async function fetchgo(data){
     method: 'post',
     body: data
   })
-  .then(function (response) {
+  /*.then(function (response) {
      return response.text();
   })
   .then(function (text) {
@@ -274,7 +274,7 @@ async function fetchgo(data){
   })
   .catch(function (error) {
     console.log(error)
-  });
+  });*/
 
   return false;
 }
@@ -341,12 +341,12 @@ function resetLevel(){
          level = new Level('next_pressed', -1);
          pageTitle.textContent = "Explications";
          console.log("ecoID vaut"+ ecoID);
-         pageText.innerHTML = ("<br/>Dans un instant, vous écouterez neuf pièces musicales. Votre tâche est de vous concentrer sur les morceaux que vous entendrez et, chaque fois que vous pensez pouvoir entendre la fin d'une phrase musicale, pressez la touche G de votre clavier. Chaque fois que vous pensez entendre la fin d'une partie musicale plus longue, une section/période musicale, pressez la barre espace du clavier. <br/> "+((ecoID===1)?"<br/>En parallèle, vous jouerez à un jeu simple. Votre tâche sera de répéter des schémas simples de \"X\" et \"O\" afin qu'ils correspondent à l'image affichée. <br/> Attention! Si la séquence présentée est écrite en bleu - vous ne devrez pas la copier! Appuyez sur le button SKIP au lieu de la recopier! <br/>":"")+"<br/> La <u> phrase musicale </u> est comme une phrase linguistique - c'est une pensée, mais véhiculée par la musique. <br/> Une <u> section musicale </u> est cependant une partie plus grande, comme une histoire, une ambiance. <br/> <br/> Essayez de suivre vos intuitions en distinguant les deux. Bonne chance !");
+         pageText.innerHTML = ("<br/>Dans un instant, vous écouterez neuf pièces musicales. Votre tâche est de vous concentrer sur les morceaux que vous entendrez et, chaque fois que vous pensez pouvoir entendre la fin d'une phrase musicale, pressez la touche G de votre clavier. Chaque fois que vous pensez entendre la fin d'une partie musicale plus longue, une section/période musicale, pressez la barre espace du clavier. <br/> "+((ecoID==1)?"<br/>En parallèle, vous jouerez à un jeu simple. Votre tâche sera de répéter des schémas simples de \"X\" et \"O\" afin qu'ils correspondent à l'image affichée. <br/> Attention! Si la séquence présentée est écrite en bleu - vous ne devrez pas la copier! Appuyez sur le button SKIP au lieu de la recopier! <br/>":"")+"<br/> La <u> phrase musicale </u> est comme une phrase linguistique - c'est une pensée, mais véhiculée par la musique. <br/> Une <u> section musicale </u> est cependant une partie plus grande, comme une histoire, une ambiance. <br/> <br/> Essayez de suivre vos intuitions en distinguant les deux. Bonne chance !");
       break;
       case 2 :
          level = new Level('next_pressed', -1);
 	      pageTitle.textContent = "Entrainement";
-         pageText.innerHTML = "Lors de la prochaine étape, vous allez entendre une pièce musicale d'entrainement. <br/> Vous allez devoir la segmenter selon phrase et section musicale"+((ecoID===1)?", et reproduire des séquences de X et O en même temps.":".")+"<br/><br/> Appuyez sur la flèche pour continuer.";
+         pageText.innerHTML = "Lors de la prochaine étape, vous allez entendre une pièce musicale d'entrainement. <br/> Vous allez devoir la segmenter selon phrase et section musicale"+((ecoID==1)?", et reproduire des séquences de X et O en même temps.":".")+"<br/><br/> Appuyez sur la flèche pour continuer.";
       break;
       case 3 :
          level = new Level('sound_played', 0);
@@ -371,7 +371,7 @@ function resetLevel(){
          if(lvlCount >= 5 && lvlCount <= 22){
             if(lvlCount % 2 != 0){
                pageTitle.textContent = "Niveau "+((lvlCount-1)/2-1)+"/9";
-               pageText.innerHTML = "Lancez la lecture ci-dessous,"+((ecoID===1)?" puis complétez autant de séquences que possible":"")+ " et séquencez de manière intuitive le morceau en phrases et en sections.";
+               pageText.innerHTML = "Lancez la lecture ci-dessous,"+((ecoID==1)?" puis complétez autant de séquences que possible":"")+ " et séquencez de manière intuitive le morceau en phrases et en sections.";
                level = new Level('sound_played', songsArray.pop());
             } //lvlCount impair -> exercice
             else{
@@ -537,18 +537,19 @@ function setupCheckboxLabels(){
   }
 }
 
+let data = new URLSearchParams();
 async function init_new_resfile(){
-  let data = new URLSearchParams();
   data.append("eco", ecoID);
   fetch("new_resfile.php", {
     method: 'post',
     body: data
   })
   .then(function (response) {
-     return response.text();
+    return response.text();
   })
-  .then(function (text) {
+   .then(function (text) {
     fileId = text;
+    console.log("file id" +fileId);
   })
   .catch(function (error) {
     console.log(error)
@@ -559,6 +560,7 @@ async function init_new_resfile(){
 
 fetchEco().then(function(response){
     ecoID = parseInt(response, 10);
+    ecoID = ecoID.toString();
     resetLevel();
 });
 
