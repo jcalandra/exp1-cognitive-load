@@ -29,7 +29,7 @@ var finalPercent = 0;
 var songsArray = [1, 2, 3, 4, 5, 6, 7, 8, 9]; //ID des musiques de test
 var blue = 0;
 
-var fileId = 0;//identifiant fichier de réponse utilisateur coté JS
+var fileId = 10;//identifiant fichier de réponse utilisateur coté JS
 
 var trackPicked = new Array(10).fill(0);
 
@@ -271,32 +271,12 @@ async function fetchgo(data){
   })
   .then(function (text) {
     console.log(text);
-  })
+  })*/
   .catch(function (error) {
     console.log(error)
-  });*/
+  });
 
   return false;
-}
-
-function anomIdToStr(id){ //renvoie l'anomalie selon son id et l'ecoID
-   switch(id){
-      case 0:
-         return (ecoID==1)?"Arpeggio":"Droplets";//return (ecoID==1)?"Melodie":"Gouttes";
-      break;
-      case 1:
-         return (ecoID==1)?"Drone":"Birds";//return (ecoID==1)?"Bourdon":"Oiseaux";
-      break;
-      case 2:
-         return (ecoID==1)?"Jingle":"Water";//return (ecoID==1)?"Sonnerie":"Etat Eau";
-      break;
-      case 3:
-         return (ecoID==1)?"Bell":"Sizzle";//return (ecoID==1)?"Cloche":"Friture";
-      break;
-      default:
-         return "erreur";
-      break;
-   }
 }
 
 
@@ -328,6 +308,7 @@ function resetLevel(){
    switch(lvlCount){
       case 0 :
          init_new_resfile();
+         console.log(fileId);
          nasaButton.href="NASA.html?ecoid="+ecoID+"&resid="+fileId;
          shuffleArray(songsArray);
          writeEco();
@@ -359,13 +340,12 @@ function resetLevel(){
          level = new Level('next_pressed', -1);
       break;
       case 23 :
-         //writeEco();
          pageTitle.textContent = "Merci pour votre participation à cette évaluation.";
          pageText.innerHTML = "Votre score final est de "+finalPercent+"%.<br/><br/>Cliquez sur '->' pour répondre à un bref sondage avant de partir.";
          level = new Level('next_pressed', -1);
       break;
       case 24 :
-         location.assign("survey.html?resid="+fileId+"&ecoid="+ecoID);
+         location.assign("survey.html?ecoid="+ecoID+"&resid="+fileId);
       break;
       default:
          if(lvlCount >= 5 && lvlCount <= 22){
@@ -530,12 +510,6 @@ prevButton.onclick = function(event){
 }
 
 
-function setupCheckboxLabels(){
-  for(var i = 1; i <= 2; i++){
-    var label = document.getElementById("anoLabel"+i);
-    label.textContent = anomIdToStr(i-1);
-  }
-}
 
 let data = new URLSearchParams();
 async function init_new_resfile(){
@@ -549,7 +523,6 @@ async function init_new_resfile(){
   })
    .then(function (text) {
     fileId = text;
-    console.log("file id" +fileId);
   })
   .catch(function (error) {
     console.log(error)
@@ -564,5 +537,4 @@ fetchEco().then(function(response){
     resetLevel();
 });
 
-export {ecoID};
-export {fileId};
+
