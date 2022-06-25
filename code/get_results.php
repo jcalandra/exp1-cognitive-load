@@ -7,7 +7,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
            fwrite($answers,";");
         }
         if(!empty($_POST["trackid"])){
-           fwrite($answers,"\n");
            fwrite($answers,"track".$_POST["trackid"]);
            fwrite($answers,";");
         }
@@ -30,6 +29,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 fwrite($answers,"questionnaire NASA_TLX\n".$_POST["nasa"]);
                 fwrite($answers,"\n");
             }
+        fwrite($answers,"\n");
         fclose($answers);
 
 }

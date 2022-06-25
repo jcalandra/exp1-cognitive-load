@@ -325,10 +325,10 @@ function getResult()
   result+= "result_know;" + result_know.toString() + "\n";
 	for (var i = 0; i < NUM_SCALES; i++)
 	{
-		result += "scale " + i.toString()+ ";" + scale[i].toString() + ";";
-		result += "results_rating " + i.toString() + ";" + results_rating[i].toString() + ";";
-		result +="results_tally " + i.toString() + ";" + results_tally[i].toString() + ";";
-		result += "results_weight " + i.toString() + ";" + results_weight[i].toString() + "\n";
+		result += "scale;" + scale[i].toString() + ";";
+		result += "results_rating;" + results_rating[i].toString() + ";";
+		result +="results_tally;" + results_tally[i].toString() + ";";
+		result += "results_weight;" + results_weight[i].toString() + "\n";
 	}
 	result += "results_overall;" + results_overall.toString();
 	return result;

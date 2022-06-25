@@ -393,8 +393,8 @@ audioPlayer.onended = async function(){ //jsp trop
       let data = new URLSearchParams();
       await fetchgo(data);
       data = new URLSearchParams();
-      data.append("sections", level.sectionArray);
-      data.append("phrases", level.phraseArray);
+      data.append("sections", level.sectionArray.join(";"));
+      data.append("phrases", level.phraseArray.join(";"));
       await fetchgo(data);
       nextLevel();
    }
@@ -407,11 +407,11 @@ function writeTime(level, button){//note le temps de click de la phrase ou secti
    //data.append(button, Date.now()-level.seqTimer);
    //fetchgo(data);
    if(button==="section") {
-      (level.sectionArray).push(Date.now()-level.anomTimer)
+      (level.sectionArray).push(Date.now()-level.anomTimer);
       level.sectionCount++;
    }
    if(button==="phrase") {
-      (level.phraseArray).push(Date.now()-level.anomTimer)
+      (level.phraseArray).push(Date.now()-level.anomTimer);
       level.phraseCount++;
    }
 }
