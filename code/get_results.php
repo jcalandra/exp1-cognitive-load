@@ -19,19 +19,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 fwrite($answers,";");
              }
 
+
+        if(!empty($_POST["nasa"])){
+                $url_components = parse_url($_SERVER['HTTP_REFERER']);
+                parse_str($url_components['query'], $params);
+                $fileid = $params['resid'];
+                $ecoid = $params['ecoid'];
+                $answers = fopen("data".$ecoid."/resultats_".$fileid.".csv", "a");
+                fwrite($answers,"questionnaire NASA_TLX: ".$_POST["nasa"]);
+                fwrite($answers,";");
+            }
+
         fwrite($answers,"\n");
         fclose($answers);
+
 }
 
-if(!empty($_POST["nasa"])){
-          $url_components = parse_url($_SERVER['HTTP_REFERER']);
-          parse_str($url_components['query'], $params);
-          $fileid = $params['resid'];
-          $ecoid = $params['ecoid'];
-          $answers = fopen("data".$ecoid."/resultats_".$fileid.".csv", "a");
-          fwrite($answers,"questionnaire NASA_TLX: ".$_POST["nasa"]);
-          fwrite($answers,";");
-          fwrite($answers,"\n");
-          fclose($answers);
-    }
 ?>
