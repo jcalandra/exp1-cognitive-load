@@ -44,18 +44,18 @@ export class Level {
       this.userSeq = []; //séquence que l'utilisateur rentre
 
 
-      if(Level.anomTimeExpecter == null){
+      /*if(Level.anomTimeExpecter == null){
          initAnomTimeExpecter();
       }
 
       this.expectedAnomalies = []; //tableau des anomalies attendues
       if(soundId>=8){
         console.log(Level.anomTimeExpecter);
-        this.expectedAnomalies = Level2.anomTimeExpecter[soundId-8].split(';').slice(1);
+        this.expectedAnomalies = Level.anomTimeExpecter[soundId-8].split(';').slice(1);
         console.log(this.expectedAnomalies);
       }
 
-      this.checkedAnomalies = [-1,-1,-1,-1];
+      this.checkedAnomalies = [-1,-1,-1,-1];*/
 
       this.soundId = soundId;
    };
