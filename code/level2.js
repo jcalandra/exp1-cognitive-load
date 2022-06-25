@@ -34,6 +34,7 @@ export class Level {
       this.resolutionType = resolutionType; //quel critère passer au niveau suivant (string)
       this.seqCount = 0; //nombre de séquences reproduites
       this.symCount = 0; //nombre de symboles reproduits
+      this.totalClicks = 0;
       this.seqTimer = Date.now(); //timer pour garder en mémoire le temps à des moments spécifiques
       this.anomTimer = 0; //timer pour cocher les anomalies
       this.sectionCount = 0;

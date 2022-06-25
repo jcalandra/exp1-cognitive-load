@@ -291,7 +291,10 @@ async function fetchgo(data){
 }*/
 
 function endLvlTextSeq(inTraining){ //affichage du texte des séquences reproduites
-   var txt = "Vous avez reproduit "+ level.seqCount +" séquences ("+ level.symCount +" symboles) en "+ (Math.floor((Date.now() - level.anomTimer)/10)*0.01).toFixed(0) +"s" /*+ "<br/>Votre réponse est à "+ successPercent() + "% correcte."*/;
+   var txt1 = "Vous avez reproduit "+ level.seqCount +" séquences ("+ level.symCount +" symboles) en "+ (Math.floor((Date.now() - level.anomTimer)/10)*0.01).toFixed(0) +"s" /*+ "<br/>Votre réponse est à "+ successPercent() + "% correcte."*/;
+   var txt2 = "\n";
+   var txt3 = "Vous avez fait " + level.totalClicks + " clics totaux pour " + level.symCount + " clics utiles, soit un ratio de " + Math.round(level.symCount/level.totalClicks*100)/100 + " clics utiles.";
+   var txt = txt1 + txt2 + txt3;
    return txt;
 }
 
@@ -419,6 +422,7 @@ function writeTime(level, button){//note le temps de click de la phrase ou secti
 
 function checkSign(level, sign){//ajoute un symbole dans la case
    var curPos = level.userSeq.length;
+   level.totalClicks += 1;
    if(level.fullSeq[curPos] == sign && blue==0){
       level.userSeq.push(sign);
       level.symCount += 1;
