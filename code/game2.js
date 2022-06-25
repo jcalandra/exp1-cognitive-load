@@ -307,8 +307,6 @@ function pickTrack(){ //choisit un random track qui n'a jamais été choisi
 function resetLevel(){
    switch(lvlCount){
       case 0 :
-         init_new_resfile();
-         console.log(fileId);
          nasaButton.href="NASA.html?ecoid="+ecoID+"&resid="+fileId;
          shuffleArray(songsArray);
          writeEco();
@@ -510,31 +508,20 @@ prevButton.onclick = function(event){
 }
 
 
-
-let data = new URLSearchParams();
 async function init_new_resfile(){
+  let data = new URLSearchParams();
   data.append("eco", ecoID);
-  fetch("new_resfile.php", {
+  var response = await fetch("new_resfile.php", {
     method: 'post',
     body: data
-  })
-  .then(function (response) {
-    return response.text();
-  })
-   .then(function (text) {
-    fileId = text;
-  })
-  .catch(function (error) {
-    console.log(error)
   });
-
-  return false;
+    return response.text();
 }
 
 fetchEco().then(function(response){
-    ecoID = parseInt(response, 10);
-    ecoID = ecoID.toString();
-    resetLevel();
+    ecoID = response;
+    init_new_resfile().then(function(response){
+      fileId = response;
+      resetLevel();
+    });
 });
-
-
