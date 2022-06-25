@@ -4,36 +4,6 @@
 
 <script language="JavaScript" type="text/javascript">
 
-//import ecoID and fileId
-
-var fileId = 0;
-var ecoID = 0;
-
-async function fetchID(){
-    var response = await fetch("get_id.php", {//appel au php
-      method: 'get',
-    });
-    return response.text(); //renvoie le echo du php
-}
-
-async function fetchEco(){
-    var response = await fetch("get_eco_again.php", {//appel au php
-      method: 'get',
-    });
-    return response.text(); //renvoie le echo du php
-}
-
-fetchID().then(function(response){
-    fileId=parseInt(response, 10);
-	fileId=fileId.toString();
-});
-
-fetchEco().then(function(response){
-    ecoID=parseInt(response, 10);
-	ecoID=ecoID.toString();
-});
-
-
 // Create a set of parallel arrays for each of the scales
 var scale      = new Array();
 var left       = new Array();
