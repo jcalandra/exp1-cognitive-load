@@ -6,7 +6,7 @@ function equalAnomalies (a1, a2){
    return true;
 }
 
-function initAnomTimeExpecter(){ 
+function initAnomTimeExpecter(){
    var xmlhttp;
     if (window.XMLHttpRequest)
    {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -34,7 +34,7 @@ export class Level {
       this.resolutionType = resolutionType; //quel critère passer au niveau suivant (string)
       this.seqCount = 0; //nombre de séquences reproduites
       this.symCount = 0; //nombre de symboles reproduits
-      this.seqTimer = Date.now(); //timer pour garder en mémoire le temps à des moments spécifiques 
+      this.seqTimer = Date.now(); //timer pour garder en mémoire le temps à des moments spécifiques
       this.anomTimer = 0; //timer pour cocher les anomalies
       this.sectionCount = 0;
       this.phraseCount = 0;
@@ -44,15 +44,15 @@ export class Level {
       this.userSeq = []; //séquence que l'utilisateur rentre
 
 
-      if(Level.anomTimeExpecter == null){ 
+      if(Level.anomTimeExpecter == null){
          initAnomTimeExpecter();
       }
 
-      this.expectedAnomalies = []; //tableau des anomalies attendues 
-      if(soundId>=8){ 
+      this.expectedAnomalies = []; //tableau des anomalies attendues
+      if(soundId>=8){
         console.log(Level.anomTimeExpecter);
-         this.expectedAnomalies = Level.anomTimeExpecter[soundId-8].split(';').slice(1);
-         console.log(this.expectedAnomalies);
+        this.expectedAnomalies = Level2.anomTimeExpecter[soundId-8].split(';').slice(1);
+        console.log(this.expectedAnomalies);
       }
 
       this.checkedAnomalies = [-1,-1,-1,-1];
