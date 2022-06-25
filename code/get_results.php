@@ -7,16 +7,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
            fwrite($answers,";");
         }
         if(!empty($_POST["trackid"])){
+           fwrite($answers,"\n");
            fwrite($answers,"track".$_POST["trackid"]);
            fwrite($answers,";");
         }
         if(!empty($_POST["phrases"])){
-                fwrite($answers,"tableau des phrases: ".$_POST["phrases"]);
-                fwrite($answers,";");
+                fwrite($answers,"tableau des phrases;".$_POST["phrases"]);
+                fwrite($answers,"\n");
              }
         if(!empty($_POST["sections"])){
-                fwrite($answers,"tableau des sections: ".$_POST["sections"]);
-                fwrite($answers,";");
+                fwrite($answers,"tableau des sections;".$_POST["sections"]);
+                fwrite($answers,"\n");
              }
 
 
@@ -26,11 +27,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 $fileid = $params['resid'];
                 $ecoid = $params['ecoid'];
                 $answers = fopen("data".$ecoid."/resultats_".$fileid.".csv", "a");
-                fwrite($answers,"questionnaire NASA_TLX: ".$_POST["nasa"]);
-                fwrite($answers,";");
+                fwrite($answers,"questionnaire NASA_TLX\n".$_POST["nasa"]);
+                fwrite($answers,"\n");
             }
-
-        fwrite($answers,"\n");
         fclose($answers);
 
 }
