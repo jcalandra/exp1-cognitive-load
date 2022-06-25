@@ -4,6 +4,25 @@
 
 <script language="JavaScript" type="text/javascript">
 
+var know = new Array();
+var result_know = new Array();
+
+know[0] = "oui non";
+
+function buttonYes()
+{
+	result_know.push(1)
+  buttonPart0()
+	return true;
+}
+
+function buttonNo()
+{
+	result_know.push(0)
+  buttonPart0()
+	return true;
+}
+
 // Create a set of parallel arrays for each of the scales
 var scale      = new Array();
 var left       = new Array();
@@ -166,6 +185,13 @@ function getScaleHTML(index)
 
 function onLoad()
 {
+	document.getElementById('div_part0').style.display = '';
+}
+
+function buttonPart0()
+{
+  document.getElementById('div_part0').style.display = 'none';
+  document.getElementById('div_part1').style.display = '';
 	// Get all the scales ready
 	for (var i = 0; i < NUM_SCALES; i++)
 	{
@@ -296,14 +322,15 @@ function getResultsHTML()
 function getResult()
 {
 	var result = [];
+  result.push(["result_know", result_know])
 	for (var i = 0; i < NUM_SCALES; i++)
 	{
-		result.push(scale[i]);
-		result.push(results_rating[i]);
-		result.push(results_tally[i]);
-		result.push(results_weight[i]);
+		result.push(["scale " + i.toString(), scale[i]]);
+		result.push(["results_rating " + i.toString(), results_rating[i]]);
+		result.push(["results_tally " + i.toString(), results_tally[i]]);
+		result.push(["results_weight " + i.toString(), results_weight[i]]);
 	}
-	result.push(results_overall);
+	result.push(["results_overall", results_overall]);
 	return result;
 }
 
@@ -397,10 +424,29 @@ input.pair
 	height: 1cm;
 	font: Bold 14px Arial, Helvetica, sans-serif;
 }
+
+input.know
+{
+	width: 5cm;
+	height: 1cm;
+	font: Bold 14px Arial, Helvetica, sans-serif;
+}
 </style>
 </head>
 <body onload="onLoad();">
-<div id="div_part1">
+<div id="div_part0">
+  Question sur la connaissance de l'oeuvre <br><br>
+  Avez-vous déjà entendu le morceau que vous venez d'écouter ? </br>
+  <table>
+  <tbody><tr>
+  <td><input class="know" id="know1" type="button" value="Oui" onclick="buttonYes();"></td>
+  </tr>
+  <tr>
+  <td><input class="know" id="know2" type="button" value="Non" onclick="buttonNo();"></td>
+  </tr>
+  </tbody></table>
+</div>
+<div id="div_part1" style="display:none">
 Questionnaire sur les tâches - Partie 1 <br>
 <br>
 Cliquez sur chaque échelle au point qui indique le mieux votre expérience de la tâche. <br>
