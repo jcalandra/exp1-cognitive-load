@@ -161,7 +161,7 @@ function updateDisplay(){
             revealElement(pageText);
          if(level.soundId != -1){
             revealElement(audioPlayer);
-            audioPlayer.src = 'sounds'+ecoID+'/track_'+level.soundId+'.mp3';
+            audioPlayer.src = 'sounds/track_'+level.soundId+'.mp3';
             audioPlayer.controls = true;
             audioPlayer.setAttribute("loop", true);
             hideElement(nextButton);
@@ -221,7 +221,7 @@ function updateDisplay(){
          revealElement(pageTitle);
          revealElement(pageText);
          revealElement(audioPlayer);
-         audioPlayer.src = 'sounds'+ecoID+'/track_'+level.soundId+'.mp3';
+         audioPlayer.src = 'sounds/track_'+level.soundId+'.mp3';
          audioPlayer.controls = true;
          audioPlayer.removeAttribute("loop");
          updateSeqDisplay();
