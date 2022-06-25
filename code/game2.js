@@ -290,7 +290,7 @@ async function fetchgo(data){
    return perc/level.checkedAnomalies.length;
 }*/
 
-function endLvlText(inTraining){ //affichage du texte des séquences reproduites
+function endLvlTextSeq(inTraining){ //affichage du texte des séquences reproduites
    var txt = "Vous avez reproduit "+ level.seqCount +" séquences ("+ level.symCount +" symboles) en "+ (Math.floor((Date.now() - level.anomTimer)/10)*0.01).toFixed(0) +"s" /*+ "<br/>Votre réponse est à "+ successPercent() + "% correcte."*/;
    return txt;
 }
@@ -334,7 +334,7 @@ function resetLevel(){
       break;
       case 4:
          pageTitle.textContent = "Bilan Entrainement ";
-         pageText.innerHTML = endLvlText(true) + "<br/><br/>Cliquez sur le bouton '->' pour passer à l'évaluation.<br/>Ou sur '<-' pour recommencer l'entrainement.";
+         pageText.innerHTML = ((ecoID==1)?endLvlTextSeq(true):"") + "<br/><br/>Cliquez sur le bouton '->' pour passer à l'évaluation.<br/>Ou sur '<-' pour recommencer l'entrainement.";
          level = new Level('next_pressed', -1);
       break;
       case 23 :
@@ -349,12 +349,12 @@ function resetLevel(){
          if(lvlCount >= 5 && lvlCount <= 22){
             if(lvlCount % 2 != 0){
                pageTitle.textContent = "Niveau "+((lvlCount-1)/2-1)+"/9";
-               pageText.innerHTML = "Lancez la lecture ci-dessous,"+((ecoID==1)?" puis complétez autant de séquences que possible":"")+ " et séquencez de manière intuitive le morceau en phrases et en sections.";
+               pageText.innerHTML = "Lancez la lecture ci-dessous,"+((ecoID==1)?" puis complétez autant de séquences que possible":"")+ " et segmentez de manière intuitive le morceau en phrases et en sections.";
                level = new Level('sound_played', songsArray.pop());
             } //lvlCount impair -> exercice
             else{
                pageTitle.textContent = "Bilan Niveau "+((lvlCount-2)/2-1);
-               pageText.innerHTML = endLvlText(true) + (lvlCount!=22?"<br/><br/>Cliquez sur le bouton '->' pour passer au prochain niveau":"<br/><br/>Cliquez sur le bouton '->' pour terminer l'évalutaion") + "<br/> <br/>  Assurez vous d'avoir bien rempli le formulaire avant de passer à la suite ";
+               pageText.innerHTML = ((ecoID==1)?endLvlTextSeq(true):"") + (lvlCount!=22? "<br/> <br/>  Assurez vous d'avoir bien rempli le formulaire ci dessous avant de passer à la suite " + "<br/><br/>Vous pourrez ensuite cliquer sur le bouton '->' pour passer au prochain niveau":"<br/><br/>Cliquez sur le bouton '->' pour terminer l'évaluation");
                level = new Level('next_pressed', -1);
             } //lvlCount pair -> bilan de l'exercice
          }
