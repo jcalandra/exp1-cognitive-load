@@ -156,7 +156,7 @@ function updateDisplay(){
             hideElement(anomArray[i]);
             hideElement(anomLabels[i]);
          }
-         if(lvlCount <= begin_exp && lvlCount != 0)
+         if(lvlCount <= begin_exp - 8 && lvlCount != 0)
             revealElement(prevButton);
          else
             hideElement(prevButton);
@@ -177,7 +177,7 @@ function updateDisplay(){
            revealElement(formNasa);
          }
 
-         else if(lvlCount<begin_exp - 6 || lvlCount>end_exp || lvlCount%2!=0){
+         else if(lvlCount<begin_exp - 8 || lvlCount>end_exp || lvlCount%2!=0){
             hideElement(formNasa);
          }
          else{
@@ -424,7 +424,7 @@ function resetLevel(){
       case 7 :
          level = new Level('sound_played', 7357);
          pageTitle.textContent = "Entrainement 3";
-         pageText.innerHTML = "Vous allez écouter une oeuvre musicale.<br/> <br/>  Appuyez sur la touche 'T' de votre clavier lorsque vous entendez la fin d'une phrase.<br/> <br/>  Appuyez sur la touche 'G' de votre clavier lorsque vous entendez la fin d'une section."+((ecoID==1)?"En même temps, reproduisez les séquences séquences de X et O présentées sur l'interface. En cas de difficultés, favorisez la tâche de segmentation.":"")+"<br/> <br/>  Cliquez sur play pour lancer le morceau, et effectuez la segmentation en même temps. L'exercice se terminera automatiquement lorsque le morceau sera terminé.";
+         pageText.innerHTML = "Vous allez écouter une oeuvre musicale.<br/> <br/>  Appuyez sur la touche 'T' de votre clavier lorsque vous entendez la fin d'une phrase.<br/> <br/>  Appuyez sur la touche 'G' de votre clavier lorsque vous entendez la fin d'une section."+((ecoID==1)?"En même temps, reproduisez les séquences de 'X' et 'O' présentées sur l'interface. En cas de difficultés, favorisez la tâche de segmentation.":"")+"<br/> <br/>  Cliquez sur play pour lancer le morceau, et effectuez la segmentation en même temps. L'exercice se terminera automatiquement lorsque le morceau sera terminé.";
       break;
       case 8:
          pageTitle.textContent = "Bilan Entrainement 3";
@@ -433,7 +433,7 @@ function resetLevel(){
       break;
       case 9 :
          pageTitle.textContent = "Exemple de questionnaire";
-         pageText.innerHTML = "A la fin de chaque niveau, vous répondrez à un questionnaire obligatoire. Cliquez sur le lien ci-dessous pour voir son contenu.<br/> Prenez le temps de lire chaque question.";
+         pageText.innerHTML = "A la fin de chaque morceau, vous répondrez à un questionnaire obligatoire. Cliquez sur le lien ci-dessous pour voir son contenu.<br/> Prenez le temps de lire chaque question.";
          level = new Level('next_pressed', -1);
       break;
       case 10:
@@ -442,43 +442,43 @@ function resetLevel(){
       break;
       case 11 :
          level = new Level('seqs_solved_with_timer', 400);
-         pageTitle.textContent = "Niveau 0/12 - reproduction de séquences.";
-         pageText.innerHTML = "Complétez un maximum de séquences de 'X' et de 'O' en évitant les clics inutiles.<br/> <br/>  Pour reproduire une séquence, cliquez à l'aide de la souris successivement sur les cases sous la séquence à reproduire. Si la séquence apparait en bleu, appuyez directement sur le bouton 'skip'. Essayez de garder la même intesité d'effort pendant toute la durée de l'exercice.<br/> <br/>  Cliquez sur play pour lancer le chronomètre, et complétez les séquences en même temps. L'exercice se terminera automatiquement lorsque le chronomètre sera terminé.";
+         pageTitle.textContent = "Reproduction de séquences.";
+         pageText.innerHTML = "Complétez un maximum de séquences de 'X' et de 'O' en évitant les clics inutiles.<br/> <br/>  Pour reproduire une séquence, cliquez à l'aide de la souris successivement sur les cases sous la séquence à reproduire. Si la séquence apparait en bleu, appuyez directement sur le bouton 'skip'. Essayez de garder la même intesité d'effort pendant toute la durée de l'exercice.<br/> <br/>  Cliquez sur play pour lancer le chronomètre, et complétez les séquences en même temps. L'exercice se terminera automatiquement lorsque le chronomètre sera terminé. La session dure 4 minutes.";
       break;
       case 12:
-         pageTitle.textContent = "Bilan Niveau 0 - reproduction de séquences.";
-         pageText.innerHTML = endLvlTextSeq(true) + "<br/> <br/>  Assurez vous d'avoir bien rempli le formulaire ci dessous avant de passer à la suite " + "<br/><br/>Vous pourrez ensuite cliquer sur le bouton '->' pour passer au prochain niveau";
+         pageTitle.textContent = "Bilan reproduction de séquences.";
+         pageText.innerHTML = endLvlTextSeq(true) + "<br/> <br/>  Assurez vous d'avoir bien rempli le formulaire ci dessous avant de passer à la suite " + "<br/><br/>Vous pourrez ensuite cliquer sur le bouton '->' pour passer au prochain morceau";
          level = new Level('next_pressed', -1);
       break;
 
       case 13 :
          level = new Level('sound_played_wo_seq', premSongsArray.pop());
-         pageTitle.textContent = "Niveau 1/12";
+         pageTitle.textContent = "Morceau 1/12";
          pageText.innerHTML = "Lancez la lecture ci-dessous, et segmentez de manière intuitive le morceau en phrases et en sections.";
       break;
       case 14:
-         pageTitle.textContent = "Bilan Niveau 1";
-         pageText.innerHTML = "Assurez vous d'avoir bien rempli le formulaire ci dessous avant de passer à la suite <br/><br/>Vous pourrez ensuite cliquer sur le bouton '->' pour passer au prochain niveau";
+         pageTitle.textContent = "Bilan Morceau 1";
+         pageText.innerHTML = "Assurez vous d'avoir bien rempli le formulaire ci dessous avant de passer à la suite <br/><br/>Vous pourrez ensuite cliquer sur le bouton '->' pour passer au prochain morceau";
          level = new Level('next_pressed', -1);
       break;
       case 15 :
          level = new Level('sound_played_wo_seq', premSongsArray.pop());
-         pageTitle.textContent = "Niveau 2/12";
+         pageTitle.textContent = "Morceau 2/12";
          pageText.innerHTML = "Lancez la lecture ci-dessous, et segmentez de manière intuitive le morceau en phrases et en sections.";
       break;
       case 16:
-         pageTitle.textContent = "Bilan Niveau 2";
-         pageText.innerHTML = " Assurez vous d'avoir bien rempli le formulaire ci dessous avant de passer à la suite <br/><br/>Vous pourrez ensuite cliquer sur le bouton '->' pour passer au prochain niveau";
+         pageTitle.textContent = "Bilan Morceau 2";
+         pageText.innerHTML = " Assurez vous d'avoir bien rempli le formulaire ci dessous avant de passer à la suite <br/><br/>Vous pourrez ensuite cliquer sur le bouton '->' pour passer au prochain morceau";
          level = new Level('next_pressed', -1);
       break;
       case 17 :
          level = new Level('sound_played_wo_seq', premSongsArray.pop());
-         pageTitle.textContent = "Niveau 3/12";
+         pageTitle.textContent = "Morceau 3/12";
          pageText.innerHTML = "Lancez la lecture ci-dessous, et segmentez de manière intuitive le morceau en phrases et en sections.";
       break;
       case 18:
-         pageTitle.textContent = "Bilan Niveau 3";
-         pageText.innerHTML = " Assurez vous d'avoir bien rempli le formulaire ci dessous avant de passer à la suite <br/><br/>Vous pourrez ensuite cliquer sur le bouton '->' pour passer au prochain niveau";
+         pageTitle.textContent = "Bilan Morceau 3";
+         pageText.innerHTML = " Assurez vous d'avoir bien rempli le formulaire ci dessous avant de passer à la suite <br/><br/>Vous pourrez ensuite cliquer sur le bouton '->' pour passer au prochain morceau";
          level = new Level('next_pressed', -1);
       break;
 
@@ -494,13 +494,19 @@ function resetLevel(){
       default:
          if(lvlCount >= begin_exp && lvlCount <= end_exp){
             if(lvlCount % 2 != 0){
-               pageTitle.textContent = "Niveau "+((lvlCount-9)/2-1)+"/12";
-               pageText.innerHTML = "Lancez la lecture ci-dessous,"+((ecoID==1)?" puis complétez autant de séquences que possible":"")+ " et segmentez de manière intuitive le morceau en phrases et en sections.";
+               pageTitle.textContent = "Morceau "+((lvlCount-9)/2-1)+"/12";
+               if (lvlCount == 19 && ecoID==1){
+                 pageText.innerHTML = " Attention ! A partir de maintenant, vous devrez reproduire des séquences de 'X' et de 'O' en même temps qu'indiquer les fins de phrases et les fins de section.  <br/> <br/> Pour rappel, pour reproduire une séquence, cliquez à l'aide de la souris successivement sur les cases sous la séquence à reproduire. Si la séquence apparait en bleu, appuyez directement sur le bouton 'skip'. <br/> <br/> Si la tâche est trop difficile, concentrez-vous sur la tâche de segmentation des phrases et sections.";
+               }
+               else{
+                 pageText.innerHTML = "";
+               }
+               pageText.innerHTML += "Lancez la lecture ci-dessous,"+((ecoID==1)?" puis complétez autant de séquences que possible":"")+ " et segmentez de manière intuitive le morceau en phrases et en sections";
                level = new Level('sound_played', songsArray.pop());
             } //lvlCount impair -> exercice
             else{
-               pageTitle.textContent = "Bilan Niveau "+((lvlCount-10)/2-1);
-               pageText.innerHTML = ((ecoID==1)?endLvlTextSeq(true):"") + (lvlCount!=end_exp? "<br/> <br/>  Assurez vous d'avoir bien rempli le formulaire ci dessous avant de passer à la suite " + "<br/><br/>Vous pourrez ensuite cliquer sur le bouton '->' pour passer au prochain niveau":"<br/><br/>Cliquez sur le bouton '->' pour terminer l'évaluation");
+               pageTitle.textContent = "Bilan Morceau "+((lvlCount-10)/2-1);
+               pageText.innerHTML = ((ecoID==1)?endLvlTextSeq(true):"") + (lvlCount!=end_exp? "<br/> <br/>  Assurez vous d'avoir bien rempli le formulaire ci dessous avant de passer à la suite " + "<br/><br/>Vous pourrez ensuite cliquer sur le bouton '->' pour passer au prochain morceau":"<br/><br/>Cliquez sur le bouton '->' pour terminer l'évaluation");
                level = new Level('next_pressed', -1);
             } //lvlCount pair -> bilan de l'exercice
          }
