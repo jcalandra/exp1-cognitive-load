@@ -28,8 +28,10 @@ var lvlCount = 0; //numéro du niveau qui atttribue des propriétés aux niveaux
 var finalPercent = 0;
 var songsArray = [1, 2, 3, 4, 5, 6, 7, 8, 9]; //ID des musiques de test
 var blue = 0;
+var begin_exp = 5;
+var end_exp = 22;
 
-var fileId = 10;//identifiant fichier de réponse utilisateur coté JS
+var fileId = 0;//identifiant fichier de réponse utilisateur coté JS
 
 var trackPicked = new Array(10).fill(0);
 
@@ -153,7 +155,7 @@ function updateDisplay(){
             hideElement(anomArray[i]);
             hideElement(anomLabels[i]);
          }
-         if(lvlCount <= 5 && lvlCount != 0)
+         if(lvlCount <= begin_exp && lvlCount != 0)
             revealElement(prevButton);
          else
             hideElement(prevButton);
@@ -170,7 +172,7 @@ function updateDisplay(){
             hideElement(audioPlayer);
             revealElement(nextButton);
          }
-         if(lvlCount<5 || lvlCount>22 || lvlCount%2!=0){
+         if(lvlCount<begin_exp || lvlCount>end_exp || lvlCount%2!=0){
             hideElement(formNasa);
          }
          else{
@@ -293,7 +295,7 @@ async function fetchgo(data){
 function endLvlTextSeq(inTraining){ //affichage du texte des séquences reproduites
    var txt1 = "Vous avez reproduit "+ level.seqCount +" séquences ("+ level.symCount +" symboles) en "+ (Math.floor((Date.now() - level.anomTimer)/10)*0.01).toFixed(0) +"s" /*+ "<br/>Votre réponse est à "+ successPercent() + "% correcte."*/;
    var txt2 = "\n";
-   var txt3 = "Vous avez fait " + level.totalClicks + " clics totaux pour " + level.symCount + " clics utiles, soit un ratio de " + Math.round(level.symCount/level.totalClicks*100)/100 + " clics utiles.";
+   var txt3 = "Vous avez fait " + level.totalClicks + " clics totaux pour " + level.symCount + " clics utiles, soit un ratio de " + Math.round(level.symCount/level.totalClicks*100)/100 + "% de clics utiles.";
    var txt = txt1 + txt2 + txt3;
    return txt;
 }
@@ -331,7 +333,7 @@ function resetLevel(){
          pageText.innerHTML = "Lors de la prochaine étape, vous allez entendre une pièce musicale d'entrainement. <br/> Vous allez devoir la segmenter selon phrase et section musicale"+((ecoID==1)?", et reproduire des séquences de X et O en même temps.":".")+"<br/><br/> Appuyez sur la flèche pour continuer.";
       break;
       case 3 :
-         level = new Level('sound_played', 0);
+         level = new Level('sound_played', 7357);
 	      pageTitle.textContent = "Entrainement";
          pageText.innerHTML = "Appuyez sur play pour lancer le morceau, et complétez l'exercice en même temps. L'exercice se terminera automatiquement lorsque le morceau sera terminé.";
       break;
@@ -349,7 +351,7 @@ function resetLevel(){
          location.assign("survey.html?ecoid="+ecoID+"&resid="+fileId);
       break;
       default:
-         if(lvlCount >= 5 && lvlCount <= 22){
+         if(lvlCount >= begin_exp && lvlCount <= end_exp){
             if(lvlCount % 2 != 0){
                pageTitle.textContent = "Niveau "+((lvlCount-1)/2-1)+"/9";
                pageText.innerHTML = "Lancez la lecture ci-dessous,"+((ecoID==1)?" puis complétez autant de séquences que possible":"")+ " et segmentez de manière intuitive le morceau en phrases et en sections.";
@@ -357,7 +359,7 @@ function resetLevel(){
             } //lvlCount impair -> exercice
             else{
                pageTitle.textContent = "Bilan Niveau "+((lvlCount-2)/2-1);
-               pageText.innerHTML = ((ecoID==1)?endLvlTextSeq(true):"") + (lvlCount!=22? "<br/> <br/>  Assurez vous d'avoir bien rempli le formulaire ci dessous avant de passer à la suite " + "<br/><br/>Vous pourrez ensuite cliquer sur le bouton '->' pour passer au prochain niveau":"<br/><br/>Cliquez sur le bouton '->' pour terminer l'évaluation");
+               pageText.innerHTML = ((ecoID==1)?endLvlTextSeq(true):"") + (lvlCount!=end_exp? "<br/> <br/>  Assurez vous d'avoir bien rempli le formulaire ci dessous avant de passer à la suite " + "<br/><br/>Vous pourrez ensuite cliquer sur le bouton '->' pour passer au prochain niveau":"<br/><br/>Cliquez sur le bouton '->' pour terminer l'évaluation");
                level = new Level('next_pressed', -1);
             } //lvlCount pair -> bilan de l'exercice
          }
@@ -385,7 +387,7 @@ function nextLevel(){//change de niveau
 }
 
 function prevLevel(){//niveau précédent
-   if(lvlCount!=5) lvlCount--;
+   if(lvlCount!=begin_exp) lvlCount--;
    else lvlCount = 1;
    resetLevel();
 }
@@ -475,7 +477,7 @@ skipButton.onclick = function(event){
 
 document.onkeydown = function(e) {
    var key = e.key;
-   if(lvlCount==3 || lvlCount >= 5 && lvlCount <= 22 && lvlCount % 2 != 0){
+   if(lvlCount==3 || lvlCount >= begin_exp && lvlCount <= end_exp && lvlCount % 2 != 0){
       if(key == 't'){ //touche t du clavier
          writeTime(level, "phrase");
          phraseText.setAttribute('style', 'color:red;text-align:center');
@@ -490,7 +492,7 @@ document.onkeydown = function(e) {
 
 document.onkeyup = function(e) {
    var key = e.keyCode;
-   if(lvlCount==3 || lvlCount >= 5 && lvlCount <= 22 && lvlCount % 2 != 0){
+   if(lvlCount==3 || lvlCount >= begin_exp && lvlCount <= end_exp && lvlCount % 2 != 0){
       if(key == 84){ //touche t du clavier
          phraseText.setAttribute('style', 'color:black;text-align:center');
       }
