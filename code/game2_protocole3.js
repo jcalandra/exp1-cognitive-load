@@ -494,12 +494,12 @@ function resetLevel(){
             if(lvlCount % 2 != 0){
                pageTitle.textContent = "Morceau "+((lvlCount-9)/2-1)+"/12";
                if (lvlCount == 19 && ecoID==1){
-                 pageText.innerHTML = " Attention ! A partir de maintenant, vous devrez reproduire des séquences de 'X' et de 'O' en même temps qu'indiquer les fins de phrases et les fins de section.  <br/> <br/> Pour rappel, pour reproduire une séquence, cliquez à l'aide de la souris successivement sur les cases sous la séquence à reproduire. Si la séquence apparait en bleu, appuyez directement sur le bouton 'skip'. <br/> <br/> <u> Si la tâche est trop difficile, concentrez-vous sur la tâche de segmentation des phrases et sections. </u> ";
+                 pageText.innerHTML = " Attention ! A partir de maintenant, vous devrez reproduire des séquences de 'X' et de 'O' en même temps qu'indiquer les fins de phrases et les fins de section.  <br/> <br/> Pour rappel, pour reproduire une séquence, cliquez à l'aide de la souris successivement sur les cases sous la séquence à reproduire. Si la séquence apparait en bleu, cliquez directement sur le bouton 'skip'. <br/> <br/> <u> Si la tâche est trop difficile, concentrez-vous sur la tâche de segmentation des phrases et sections.</u> ";
                }
                else{
                  pageText.innerHTML = "";
                }
-               pageText.innerHTML += " Lancez la lecture ci-dessous,"+((ecoID==1)?" puis complétez autant de séquences que possible":"")+ " et segmentez de manière intuitive le morceau en phrases et en sections";
+               pageText.innerHTML += " Lancez la lecture ci-dessous,"+((ecoID==1)?" puis complétez autant de séquences que possible":"")+ " et segmentez de manière intuitive le morceau en phrases et en sections.";
                level = new Level('sound_played', songsArray.pop());
             } //lvlCount impair -> exercice
             else{
