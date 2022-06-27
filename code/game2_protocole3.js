@@ -9,8 +9,8 @@ var skipButton = document.getElementById('skipbutton');
 var nextButton = document.getElementById('next');
 var prevButton = document.getElementById('prev');
 var seqDisplayer = document.getElementById('seqtable').children[0].children;
-var seqCountDisplay = document.getElementById('nbseq');
-var seqTimeDisplay = document.getElementById('timeseq');
+//var seqCountDisplay = document.getElementById('nbseq');
+//var seqTimeDisplay = document.getElementById('timeseq');
 var pageTitle = document.getElementById('pagetitle');
 var pageText = document.getElementById('pagetext');
 var anomArray = document.querySelectorAll('div.box2 > div.column')[0]; //tableau HTML des anomalies
@@ -134,10 +134,6 @@ function updateSeqDisplay(){ //affiche une nouvelle séquence (?)
    }
 }
 
-function updateSeqCountDisplay(){
-   seqCountDisplay.textContent = "Copied sequences : "+level.seqCount;
-   seqTimeDisplay.textContent = "Latest copy time : "+String((Math.floor((Date.now() - level.seqTimer)/10)*0.01).toFixed(2));
-}
 
 
 
@@ -150,8 +146,8 @@ function updateDisplay(){
          hideElement(skipButton);
          hideElement(seqDisplayer[0]);
          hideElement(seqDisplayer[1]);
-         hideElement(seqCountDisplay);
-         hideElement(seqTimeDisplay);
+         //hideElement(seqCountDisplay);
+         //hideElement(seqTimeDisplay);
          for(let i = 0; i < anomArray.length; i++){
             hideElement(anomArray[i]);
             hideElement(anomLabels[i]);
@@ -193,8 +189,8 @@ function updateDisplay(){
          revealElement(skipButton);
          revealElement(seqDisplayer[0]);
          revealElement(seqDisplayer[1]);
-         revealElement(seqCountDisplay);
-         revealElement(seqTimeDisplay);
+         //revealElement(seqCountDisplay);
+         //revealElement(seqTimeDisplay);
          for(let i = 0; i < anomArray.length; i++){
             hideElement(anomArray[i]);
             hideElement(anomLabels[i]);
@@ -206,7 +202,6 @@ function updateDisplay(){
          revealElement(pageText);
          hideElement(audioPlayer);
          updateSeqDisplay();
-         updateSeqCountDisplay();
       break;
 
       case 'seqs_solved_with_timer':
@@ -217,8 +212,8 @@ function updateDisplay(){
           hideElement(seqDisplayer[0]);
           hideElement(seqDisplayer[1]);
           hideElement(formNasa);
-          hideElement(seqCountDisplay);
-          hideElement(seqTimeDisplay);
+          //hideElement(seqCountDisplay);
+          //hideElement(seqTimeDisplay);
           for(let i = 0; i < anomArray.length; i++){
              hideElement(anomArray[i]);
              hideElement(anomLabels[i]);
@@ -232,7 +227,6 @@ function updateDisplay(){
           audioPlayer.controls = true;
           audioPlayer.removeAttribute("loop");
           updateSeqDisplay();
-          updateSeqCountDisplay();
        break;
 
       case 'sound_played':
@@ -243,8 +237,8 @@ function updateDisplay(){
          hideElement(seqDisplayer[0]);
          hideElement(seqDisplayer[1]);
          hideElement(formNasa);
-         hideElement(seqCountDisplay);
-         hideElement(seqTimeDisplay);
+         //hideElement(seqCountDisplay);
+         //hideElement(seqTimeDisplay);
          for(let i = 0; i < anomArray.length; i++){
             hideElement(anomArray[i]);
             hideElement(anomLabels[i]);
@@ -258,7 +252,6 @@ function updateDisplay(){
          audioPlayer.controls = true;
          audioPlayer.removeAttribute("loop");
          updateSeqDisplay();
-         updateSeqCountDisplay();
       break;
 
       case 'sound_played_wo_seq':
@@ -269,8 +262,8 @@ function updateDisplay(){
          hideElement(seqDisplayer[0]);
          hideElement(seqDisplayer[1]);
          hideElement(formNasa);
-         hideElement(seqCountDisplay);
-         hideElement(seqTimeDisplay);
+         //hideElement(seqCountDisplay);
+         //hideElement(seqTimeDisplay);
          for(let i = 0; i < anomArray.length; i++){
             hideElement(anomArray[i]);
             hideElement(anomLabels[i]);
@@ -285,6 +278,9 @@ function updateDisplay(){
          audioPlayer.removeAttribute("loop");
       break;
    }
+   if(lvlCount==9){
+      hideElement(formNasa);
+   }
 }
 
 audioPlayer.onplay = function(){
@@ -295,8 +291,8 @@ audioPlayer.onplay = function(){
       revealElement(skipButton);
       revealElement(seqDisplayer[0]);
       revealElement(seqDisplayer[1]);
-      revealElement(seqCountDisplay);
-      revealElement(seqTimeDisplay);
+      //revealElement(seqCountDisplay);
+      //revealElement(seqTimeDisplay);
    }
    else if(level.resolutionType === 'next_pressed') {
       revealElement(nextButton);
@@ -380,6 +376,7 @@ function resetLevel(){
    switch(lvlCount){
       case 0 :
          nasaButton.href="NASA.html?ecoid="+ecoID+"&resid="+fileId;
+         //nasaButton.onclick="window.open('NASA.html?ecoid="+ecoID+"&resid="+fileId+",'_blank');"; 
          shuffleArray(songsArray);
          shuffleArray(premSongsArray);
          writeEco();
@@ -387,13 +384,13 @@ function resetLevel(){
          //setupCheckboxLabels();
          level = new Level('next_pressed', -1);
          pageTitle.textContent = "Bienvenue!"
-         pageText.innerHTML = "Merci pour votre participation à cette expérience!<br/><br/> Ce jeu a pour but d'étudier le phénomène de la perception musicale. Votre rôle sera d'écouter attentivement des oeuvres musicales afin d'annoter les fin de phrases et de section que vous reconnaissez. Vous devrez par ailleurs effectuer un exercice de reproduction de chaînes de caractères 'X' et '0'" +((ecoID==1)?", puis effectuer les deux exercices en simultané":"") + ".<br/><br/> Cette expérience va se dérouler en plusieurs étapes:<ol> <li> Tout d'abord, vous effectuerez des sessions d'entraînement sur les tâche à effectuer </li><li>Dans un second temps, vous reproduierez pendant un temps défini un ensemble de séquence de caractères 'X' et 'O' présentés à l'écran.</li> <li> Dans la troisième partie de l'étude vous seront présentés des pièces musicales et nous vous demanderons de les segmenter d'une manière qui vous semble intuitive" +((ecoID==1)?", en effectuant la tâche de reproduction des séquences en simultané":"") + ". </li> <li> Après chaque pièce musicale, vous remplirez un court questionnaire qui nous aidera à évaluer votre effort lors de l'exécution de la tache </li><li>Enfin, vous repondrez à un court questionnaire concernant vos compétences musicales.</li> </ol> Vos performances et résultats sont totalement anonymes et vous ne serez en aucun cas lié à vos réponses. <br/> <br/> Si vous souhaitez avoir plus de détails sur l'expérimentation, n'hésitez pas à nous laisser votre adresse email à la fin de l'enquête." ;
+         pageText.innerHTML = "Merci pour votre participation à cette expérience!<br/><br/> Ce jeu a pour but d'étudier le phénomène de la perception musicale. Votre rôle sera d'écouter attentivement des oeuvres musicales afin d'annoter les fin de phrases et de section que vous reconnaissez. Vous devrez par ailleurs effectuer un exercice de reproduction de chaînes de caractères 'X' et '0'" +((ecoID==1)?", puis effectuer les deux exercices en simultané":"") + ".<br/><br/> Cette expérience va se dérouler en plusieurs étapes:<ol> <li> Tout d'abord, vous effectuerez des sessions d'entraînement sur les tâches à effectuer </li><li>Dans un second temps, vous reproduirez pendant un temps défini un ensemble de séquence de caractères 'X' et 'O' présentés à l'écran.</li> <li> Dans la troisième partie de l'étude vous seront présentées des pièces musicales et nous vous demanderons de les segmenter d'une manière qui vous semble intuitive" +((ecoID==1)?", en effectuant la tâche de reproduction des séquences en simultané":"") + ". </li> <li> Après chaque pièce musicale, vous remplirez un court questionnaire qui nous aidera à évaluer votre effort lors de l'exécution de la tache </li><li>Enfin, vous répondrez à un court questionnaire concernant vos compétences musicales.</li> </ol> Vos performances et résultats sont totalement anonymes et vous ne serez en aucun cas lié à vos réponses. <br/> <br/> Si vous souhaitez avoir plus de détails sur l'expérimentation, n'hésitez pas à nous laisser votre adresse email à la fin de l'enquête." ;
       break;
       case 1:
          level = new Level('next_pressed', -1);
          pageTitle.textContent = "Explications";
          console.log("ecoID vaut"+ ecoID);
-         pageText.innerHTML = ("<br/>Lors de l'expérience, vous écouterez douze pièces musicales. Votre tâche est de vous concentrer sur les morceaux que vous entendrez et, chaque fois que vous pensez pouvoir entendre la fin d'une phrase musicale, pressez la touche 'T' de votre clavier. Chaque fois que vous pensez entendre la fin d'une partie musicale plus longue, une section/période musicale, pressez la touche 'G' du clavier. <br/> "+((ecoID==1)?"<br/>En parallèle, vous jouerez à un jeu simple. Votre tâche sera de répéter des séquences  de 'X' et 'O' afin qu'ils correspondent à l'image affichée. <br/> Attention! Si la séquence présentée est écrite en bleu - vous ne devrez pas la copier! Cliquez sur le button 'skip' au lieu de la recopier. <br/>":"")+"<br/> La <u> phrase musicale </u> est comme une phrase linguistique - c'est une pensée, mais véhiculée par la musique. <br/> Une <u> section musicale </u> est cependant une partie plus grande, comme une histoire, une ambiance. <br/> <br/> Essayez de suivre vos intuitions en distinguant les deux.");
+         pageText.innerHTML = ("<br/>Lors de l'expérience, vous écouterez douze pièces musicales. Votre tâche est de vous concentrer sur les morceaux que vous entendrez et, chaque fois que vous pensez pouvoir entendre la fin d'une phrase musicale, pressez la touche 'T' de votre clavier. Chaque fois que vous pensez entendre la fin d'une partie musicale plus longue, une section/période musicale, pressez la touche 'G' du clavier. <br/> La fin d'une section enregistre en même temps la fin d'une phrase, il est donc inutile d'appuyer sur les deux simultanément. <br/>"+((ecoID==1)?"<br/>En parallèle, vous jouerez à un jeu simple. Votre tâche sera de répéter des séquences  de 'X' et 'O' afin qu'ils correspondent à l'image affichée. <br/> Attention! Si la séquence présentée est écrite en bleu - vous ne devrez pas la copier! Cliquez sur le button 'skip' au lieu de la recopier. <br/>":"")+"<br/> La <u> phrase musicale </u> est comme une phrase linguistique - c'est une pensée, mais véhiculée par la musique. <br/> Une <u> section musicale </u> est cependant une partie plus grande, comme une histoire, une ambiance. <br/> <br/> Essayez de suivre vos intuitions en distinguant les deux.");
       break;
       case 2 :
          level = new Level('next_pressed', -1);
@@ -414,7 +411,7 @@ function resetLevel(){
       case 5 :
          level = new Level('sound_played_wo_seq', 73572);
          pageTitle.textContent = "Entrainement 2";
-         pageText.innerHTML = "Vous allez écouter une oeuvre musicale.<br/> <br/>  Appuyez sur la touche 'T' de votre clavier lorsque vous entendez la fin d'une phrase.<br/> <br/>  Appuyez sur la touche 'G' de votre clavier lorsque vous entendez la fin d'une section.<br/> <br/>  Cliquez sur play pour lancer le morceau, et effectuez la segmentation en même temps. L'exercice se terminera automatiquement lorsque le morceau sera terminé.";
+         pageText.innerHTML = "Vous allez écouter une oeuvre musicale.<br/> <br/>  Appuyez sur la touche 'T' de votre clavier lorsque vous entendez la fin d'une phrase.<br/> <br/>  Appuyez sur la touche 'G' de votre clavier lorsque vous entendez la fin d'une section.<br/><br/> La fin d'une section enregistre en même temps la fin d'une phrase, il est donc inutile d'appuyer sur les deux simultanément. <br/> <br/>  Cliquez sur play pour lancer le morceau, et effectuez la segmentation en même temps. L'exercice se terminera automatiquement lorsque le morceau sera terminé.";
       break;
       case 6:
          pageTitle.textContent = "Bilan Entrainement 2";
@@ -424,7 +421,7 @@ function resetLevel(){
       case 7 :
          level = new Level('sound_played', 7357);
          pageTitle.textContent = "Entrainement 3";
-         pageText.innerHTML = "Vous allez écouter une oeuvre musicale.<br/> <br/>  Appuyez sur la touche 'T' de votre clavier lorsque vous entendez la fin d'une phrase.<br/> <br/>  Appuyez sur la touche 'G' de votre clavier lorsque vous entendez la fin d'une section."+((ecoID==1)?"En même temps, reproduisez les séquences de 'X' et 'O' présentées sur l'interface. En cas de difficultés, favorisez la tâche de segmentation.":"")+"<br/> <br/>  Cliquez sur play pour lancer le morceau, et effectuez la segmentation en même temps. L'exercice se terminera automatiquement lorsque le morceau sera terminé.";
+         pageText.innerHTML = "Vous allez écouter une oeuvre musicale.<br/> <br/>  Appuyez sur la touche 'T' de votre clavier lorsque vous entendez la fin d'une phrase.<br/> <br/>  Appuyez sur la touche 'G' de votre clavier lorsque vous entendez la fin d'une section."+((ecoID==1)?" En même temps, reproduisez les séquences de 'X' et 'O' présentées sur l'interface. En cas de difficultés, favorisez la tâche de segmentation.":"")+"<br/> <br/>  Cliquez sur play pour lancer le morceau, et effectuez la segmentation en même temps. L'exercice se terminera automatiquement lorsque le morceau sera terminé.";
       break;
       case 8:
          pageTitle.textContent = "Bilan Entrainement 3";
@@ -433,7 +430,8 @@ function resetLevel(){
       break;
       case 9 :
          pageTitle.textContent = "Exemple de questionnaire";
-         pageText.innerHTML = "A la fin de chaque morceau, vous répondrez à un questionnaire obligatoire. Cliquez sur le lien ci-dessous pour voir son contenu.<br/> Prenez le temps de lire chaque question.";
+         pageText.innerHTML = "A la fin de chaque morceau, vous répondrez à un questionnaire obligatoire dont le contenu est le suivant. Vous devrez évaluer votre charge mentale pour différents aspects sur une échelle, puis comparer l'impact de ceux-ci les uns par rapport aux autres. <br/> <br/> <u> Prenez bien le temps de lire chaque question et les intitulés sur les échelles! </u> <br/> (Attention, pour la question \"Performance\" l'échelle est inversée!)";
+         pageText.innerHTML = " A la fin de chaque morceaux vous répondrez à un questionnaire obligatoire dont le contenu est le suivant: <br/> <br/> Tout d'abord, si vous venez d'écouter une chanson, nous vous demanderons si vous avez déjà entendu l'oeuvre avant cette expérience. <br/> <br/> <img width=70% height=70% class=\"fit-picture\" src=\"heard.png\"> <br/><br/> Ensuite, vous devrez évaluer votre charge mentale pour différentes aspects sur une échelle. Prenez bien le temps de lire chaque question et les intitulés sur les échelles! </u> <br/> (Attention, pour la question \"Performance\" l'échelle est inversée!) <br/><br/> <img width=100% height=100% class=\"fit-picture\" src=\"formulaire.png\"><br/> <br/> Enfin, vous comparerez l'impact des différents aspects sur la charge de travail les uns par rapport aux autres. Par exemple: <br/><br/> <img width=70% height=70% class=\"fit-picture\" src=\"compare.png\">"
          level = new Level('next_pressed', -1);
       break;
       case 10:
@@ -496,12 +494,12 @@ function resetLevel(){
             if(lvlCount % 2 != 0){
                pageTitle.textContent = "Morceau "+((lvlCount-9)/2-1)+"/12";
                if (lvlCount == 19 && ecoID==1){
-                 pageText.innerHTML = " Attention ! A partir de maintenant, vous devrez reproduire des séquences de 'X' et de 'O' en même temps qu'indiquer les fins de phrases et les fins de section.  <br/> <br/> Pour rappel, pour reproduire une séquence, cliquez à l'aide de la souris successivement sur les cases sous la séquence à reproduire. Si la séquence apparait en bleu, appuyez directement sur le bouton 'skip'. <br/> <br/> Si la tâche est trop difficile, concentrez-vous sur la tâche de segmentation des phrases et sections.";
+                 pageText.innerHTML = " Attention ! A partir de maintenant, vous devrez reproduire des séquences de 'X' et de 'O' en même temps qu'indiquer les fins de phrases et les fins de section.  <br/> <br/> Pour rappel, pour reproduire une séquence, cliquez à l'aide de la souris successivement sur les cases sous la séquence à reproduire. Si la séquence apparait en bleu, appuyez directement sur le bouton 'skip'. <br/> <br/> <u> Si la tâche est trop difficile, concentrez-vous sur la tâche de segmentation des phrases et sections. </u> ";
                }
                else{
                  pageText.innerHTML = "";
                }
-               pageText.innerHTML += "Lancez la lecture ci-dessous,"+((ecoID==1)?" puis complétez autant de séquences que possible":"")+ " et segmentez de manière intuitive le morceau en phrases et en sections";
+               pageText.innerHTML += " Lancez la lecture ci-dessous,"+((ecoID==1)?" puis complétez autant de séquences que possible":"")+ " et segmentez de manière intuitive le morceau en phrases et en sections";
                level = new Level('sound_played', songsArray.pop());
             } //lvlCount impair -> exercice
             else{
@@ -583,7 +581,6 @@ function checkSign(level, sign){//ajoute un symbole dans la case
       data.append("lvltime", Date.now()-level.seqTimer);
       fetchgo(data);
       level.seqCount++;
-      updateSeqCountDisplay();
       level.fullSeq = newSequence();
       level.userSeq = [];
       updateSeqDisplay();
@@ -595,7 +592,6 @@ function checkSign(level, sign){//ajoute un symbole dans la case
       data.append("lvltime", Date.now()-level.seqTimer);
       fetchgo(data);
       level.seqCount++;
-      updateSeqCountDisplay();
       level.fullSeq = newSequence();
       level.userSeq = [];
       updateSeqDisplay();
