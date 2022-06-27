@@ -358,7 +358,7 @@ async function fetchgo(data){
 function endLvlTextSeq(inTraining){ //affichage du texte des séquences reproduites
    var txt1 = "Vous avez reproduit "+ level.seqCount +" séquences ("+ level.symCount +" symboles) en "+ (Math.floor((Date.now() - level.anomTimer)/10)*0.01).toFixed(0) +"s" /*+ "<br/>Votre réponse est à "+ successPercent() + "% correcte."*/;
    var txt2 = "\n";
-   var txt3 = "Vous avez fait " + level.totalClicks + " clics totaux pour " + level.symCount + " clics utiles, soit un ratio de " + Math.round(level.symCount/level.totalClicks*1000)/10 + "% de clics utiles.";
+   var txt3 = "Vous avez fait " + level.totalClicks + " clics totaux pour " + level.symCount + " clics utiles, soit un ratio de " + Math.round(level.symCount/level.totalClicks*1000)/10 + "% de clics utiles <br/>.";
    var txt = txt1 + txt2 + txt3;
    return txt;
 }
@@ -445,7 +445,7 @@ function resetLevel(){
       break;
       case 12:
          pageTitle.textContent = "Bilan reproduction de séquences.";
-         pageText.innerHTML = endLvlTextSeq(true) + "<br/> <br/>  Assurez vous d'avoir bien rempli le formulaire ci dessous avant de passer à la suite " + "<br/><br/>Vous pourrez ensuite cliquer sur le bouton '->' pour passer au prochain morceau";
+         pageText.innerHTML = endLvlTextSeq(true) + "<br/> <br/>  Assurez vous d'avoir bien rempli le formulaire ci dessous avant de passer à la suite. Votre réponse à la première question n'est pas importante vu qu'il n'y avait pas d'oeuvre à écouter durant cette phase. " + "<br/><br/>Vous pourrez ensuite cliquer sur le bouton '->' pour passer au prochain morceau";
          level = new Level('next_pressed', -1);
       break;
 
