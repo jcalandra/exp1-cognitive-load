@@ -1,38 +1,27 @@
-<html><head>
-<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<html lang="fr"><head>
+<meta http-equiv="content-type" content="text/html" charset="utf-8">
 <title>NASA Task Load Index</title>
 
 <script language="JavaScript" type="text/javascript">
 
-//import ecoID and fileId
+var know = new Array();
+var result_know = new Array();
 
-var fileId = 0;
-var ecoID = 0;
+know[0] = "oui non";
 
-async function fetchID(){
-    var response = await fetch("get_id.php", {//appel au php
-      method: 'get',
-    });
-    return response.text(); //renvoie le echo du php
+function buttonYes()
+{
+	result_know.push(1)
+  buttonPart0()
+	return true;
 }
 
-async function fetchEco(){
-    var response = await fetch("get_eco_again.php", {//appel au php
-      method: 'get',
-    });
-    return response.text(); //renvoie le echo du php
+function buttonNo()
+{
+	result_know.push(0)
+  buttonPart0()
+	return true;
 }
-
-fetchID().then(function(response){
-    fileId=parseInt(response, 10);
-	fileId=fileId.toString();
-});
-
-fetchEco().then(function(response){
-    ecoID=parseInt(response, 10);
-	ecoID=ecoID.toString();
-});
-
 
 // Create a set of parallel arrays for each of the scales
 var scale      = new Array();
@@ -104,10 +93,6 @@ for (var i = 0; i < NUM_SCALES; i++)
 
 async function fetchgo(data)
 {
-
-	  data.append("fileId", fileId);
-	  data.append("ecoId", ecoID);
-
 	  fetch("get_results.php", {
 	    method: 'post',
 	    body: data
@@ -200,6 +185,13 @@ function getScaleHTML(index)
 
 function onLoad()
 {
+	document.getElementById('div_part0').style.display = '';
+}
+
+function buttonPart0()
+{
+  document.getElementById('div_part0').style.display = 'none';
+  document.getElementById('div_part1').style.display = '';
 	// Get all the scales ready
 	for (var i = 0; i < NUM_SCALES; i++)
 	{
@@ -329,15 +321,16 @@ function getResultsHTML()
 
 function getResult()
 {
-	var result = [];
+	var result = "";
+  result+= "result_know;" + result_know.toString() + "\n";
 	for (var i = 0; i < NUM_SCALES; i++)
 	{
-		result.push(scale[i]);
-		result.push(results_rating[i]);
-		result.push(results_tally[i]);
-		result.push(results_weight[i]);
+		result += "scale;" + scale[i].toString() + ";";
+		result += "results_rating;" + results_rating[i].toString() + ";";
+		result +="results_tally;" + results_tally[i].toString() + ";";
+		result += "results_weight;" + results_weight[i].toString() + "\n";
 	}
-	result.push(results_overall);
+	result += "results_overall;" + results_overall.toString();
 	return result;
 }
 
@@ -431,10 +424,29 @@ input.pair
 	height: 1cm;
 	font: Bold 14px Arial, Helvetica, sans-serif;
 }
+
+input.know
+{
+	width: 5cm;
+	height: 1cm;
+	font: Bold 14px Arial, Helvetica, sans-serif;
+}
 </style>
 </head>
 <body onload="onLoad();">
-<div id="div_part1">
+<div id="div_part0">
+  Question sur la connaissance de l'oeuvre <br><br>
+  Avez-vous déjà entendu le morceau que vous venez d'écouter ? </br>
+  <table>
+  <tbody><tr>
+  <td><input class="know" id="know1" type="button" value="Oui" onclick="buttonYes();"></td>
+  </tr>
+  <tr>
+  <td><input class="know" id="know2" type="button" value="Non" onclick="buttonNo();"></td>
+  </tr>
+  </tbody></table>
+</div>
+<div id="div_part1" style="display:none">
 Questionnaire sur les tâches - Partie 1 <br>
 <br>
 Cliquez sur chaque échelle au point qui indique le mieux votre expérience de la tâche. <br>

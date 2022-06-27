@@ -7,6 +7,7 @@ while($answers != FALSE){
    $n++;
    $answers = fopen("data".$eco."/resultats_".$n.".csv", "r");
 }
+$answers = fopen("data".$eco."/resultats_".$n.".csv", "w");
 fclose($answers);
 echo $n;
 ?>

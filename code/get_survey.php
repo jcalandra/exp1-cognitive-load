@@ -18,6 +18,10 @@
            fwrite($answers,"Duree formation musicale;".$_POST["fm"]);
            fwrite($answers,"\n");
         }
+        if(!empty($_POST["qi"])){
+           fwrite($answers,"Instrument(s);".$_POST["qi"]);
+           fwrite($answers,"\n");
+        }
         if(!empty($_POST["dpi"])){
            fwrite($answers,"Duree pratique d'un instrument;".$_POST["dpi"]);
            fwrite($answers,"\n");
