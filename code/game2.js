@@ -511,8 +511,9 @@ prevButton.onclick = function(event){
 
 
 
-let data = new URLSearchParams();
+
 async function init_new_resfile(){
+let data = new URLSearchParams();
   data.append("eco", ecoID);
   fetch("new_resfile.php", {
     method: 'post',
