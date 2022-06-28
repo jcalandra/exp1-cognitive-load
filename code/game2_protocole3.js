@@ -220,7 +220,7 @@ function updateDisplay(){
             hideElement(anomArray[i]);
             hideElement(anomLabels[i]);
          }
-         hideElement(prevButton);
+         revealElement(prevButton);
          hideElement(nextButton); //previous hide
          revealElement(pageTitle);
          revealElement(pageText);
@@ -245,7 +245,7 @@ function updateDisplay(){
             hideElement(anomArray[i]);
             hideElement(anomLabels[i]);
          }
-         hideElement(prevButton);
+         revealElement(prevButton);
          hideElement(nextButton); //previous hide
          revealElement(pageTitle);
          revealElement(pageText);
@@ -297,7 +297,10 @@ audioPlayer.onplay = function(){
     level.anomTimer = Date.now();
     level.seqTimer = Date.now();
    }
- }
+   if(level.resolutionType == 'sound_played_wo_seq' || level.resolutionType == 'sound_played'){
+      hideElement(prevButton);
+   }
+}
 
 
 async function fetchgo(data){
