@@ -398,7 +398,7 @@ function resetLevel(){
       break;
       case 6:
          pageTitle.textContent = "Bilan Entrainement 2";
-         pageText.innerHTML = "<br/><br/>Cliquez sur le bouton '->' pour passer à l'entraînement suivant.<br/>Ou sur '<-' pour recommencer l'entrainement.";
+         pageText.innerHTML = "Voici la segmentation attendue. Cliquez sur le bouton 'play' de la vidéo pour entendre le morceau et voir défiler la barre de temps. <br/>Les fin de phrases sont indiquées par des carrés bleus et les fin de sections par des losanges rouges. Les fin de sections sont superposées aux fins de phrases mais vous n'avez besoin de cliquer que sur le bouton 'section'.<br/><br/> Vous pouvez tester l'exemple précédent autant de fois que vous le souhaitez.<br/><br/> <video width=\"560\" height=\"420\" controls><source src=\"73572.mp4\" type=video/mp4></video><br/><br/><br/>Cliquez sur le bouton '->' pour passer à l'entraînement suivant.<br/>Ou sur '<-' pour recommencer l'entrainement.";
          level = new Level('next_pressed', -1);
       break;
       case 7 :
@@ -408,7 +408,7 @@ function resetLevel(){
       break;
       case 8:
          pageTitle.textContent = "Bilan Entrainement 3";
-         pageText.innerHTML = ((ecoID==1)?endLvlTextSeq(true):"") +"Cliquez sur le bouton '->' pour passer à la présentation du questionnaire.<br/>Ou sur '<-' pour recommencer l'entrainement.";
+         pageText.innerHTML = ((ecoID==1)?endLvlTextSeq(true):"") +"Voici la segmentation attendue. Cliquez sur le bouton 'play' de la vidéo pour entendre le morceau et voir défiler la barre de temps. <br/>Les fin de phrases sont indiquées par des carrés bleus et les fin de sections par des losanges rouges. Les fin de sections sont superposées aux fins de phrases mais vous n'avez besoin de cliquer que sur le bouton 'section'.<br/><br/> Vous pouvez tester l'exemple précédent autant de fois que vous le souhaitez.<br/><br/> <video width=\"560\" height=\"420\" controls><source src=\"7357.mp4\" type=video/mp4></video><br/><br/><br/>Cliquez sur le bouton '->' pour passer à la présentation du questionnaire.<br/>Ou sur '<-' pour recommencer l'entrainement.";
          level = new Level('next_pressed', -1);
       break;
       case 9 :
