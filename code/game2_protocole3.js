@@ -466,7 +466,7 @@ function resetLevel(){
 
       case 37 :
          pageTitle.textContent = "Merci pour votre participation à cette évaluation.";
-         pageText.innerHTML = "Votre score final est de "+finalPercent+"%.<br/><br/>Cliquez sur '->' pour répondre à un bref sondage avant de partir.";
+         pageText.innerHTML = "Cliquez sur '->' pour répondre à un bref sondage avant de partir.";
          level = new Level('next_pressed', -1);
       break;
       case 38 :
@@ -613,12 +613,12 @@ document.onkeydown = function(e) {
 }
 
 document.onkeyup = function(e) {
-   var key = e.keyCode;
+   var key = e.key;
    if(lvlCount==5 || lvlCount==7 || lvlCount >= begin_exp - 6 && lvlCount <= end_exp && lvlCount % 2 != 0){
-      if(key == 84){ //touche t du clavier
+      if(key == 't'){ //touche t du clavier
          phraseText.setAttribute('style', 'color:black;text-align:center');
       }
-      if(key == 71){ //touche g du clavier
+      if(key == 'g'){ //touche g du clavier
          sectionText.setAttribute('style', 'color:black;text-align:center');
       }
    }
