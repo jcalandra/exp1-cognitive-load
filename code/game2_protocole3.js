@@ -220,7 +220,7 @@ function updateDisplay(){
             hideElement(anomArray[i]);
             hideElement(anomLabels[i]);
          }
-         revealElement(prevButton);
+         hideElement(prevButton);
          hideElement(nextButton); //previous hide
          revealElement(pageTitle);
          revealElement(pageText);
@@ -245,7 +245,7 @@ function updateDisplay(){
             hideElement(anomArray[i]);
             hideElement(anomLabels[i]);
          }
-         revealElement(prevButton);
+         hideElement(prevButton);
          hideElement(nextButton); //previous hide
          revealElement(pageTitle);
          revealElement(pageText);
